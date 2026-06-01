@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.env
+.env.local
+.DS_Store
+.vite/
+app/node_modules/
+app/dist/
+app/.env
+app/.env.local
+app/.vite/

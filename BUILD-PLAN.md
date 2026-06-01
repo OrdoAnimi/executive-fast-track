@@ -6,6 +6,8 @@ Build in controlled release cycles. Do not use one uncontrolled overnight genera
 
 ## Release 0 — Product operating system
 
+Status: complete.
+
 Purpose: Establish the private product foundation.
 
 Scope:
@@ -32,6 +34,8 @@ Acceptance criteria:
 
 ## Release 1 — Static site MVP
 
+Status: complete.
+
 Purpose: Create a private course site scaffold.
 
 Scope:
@@ -51,22 +55,35 @@ Acceptance criteria:
 
 ## Release 2 — Level 100 curriculum
 
+Status: content complete; pending local build and visual verification.
+
 Purpose: Build the first usable learning path.
 
 Scope:
 
 - Executive Thinking.
-- Strategy Language.
+- Strategy Without Architecture Jargon.
 - Finance for Non-Finance Leaders.
 - Boardroom Awareness.
-- Market Narrative.
-- Risk and Security.
-- Operating Model Basics.
+- Market Narrative and Commercial Positioning.
+- Risk, Security, and Assurance.
+- Operating Model and Execution Rhythm.
 
 Acceptance criteria:
 
 - Each module has video anchor, transcript placeholder, PDF notes placeholder, optional reading, cool notes, executive vocabulary, terms to avoid, one boardroom sentence, and optional drill.
 - Learner can complete a module in low-energy mode without forced quiz behaviour.
+- Level 100 modules are visible on the app homepage.
+- Resources index includes first-pass video and reading anchors.
+
+Verification required:
+
+```bash
+cd /c/Users/phill/Documents/GitHub/executive-fast-track/app
+npm install
+npm run build
+npm run dev
+```
 
 ## Release 3 — Executive lens system
 

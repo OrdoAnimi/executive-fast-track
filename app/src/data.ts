@@ -4,7 +4,21 @@ export type CourseLevel = {
   purpose: string
   modules: string[]
   outcome: string
-  status: 'Foundation' | 'Designed' | 'Planned'
+  status: 'Foundation' | 'Designed' | 'Planned' | 'Live'
+}
+
+export type Level100Module = {
+  id: string
+  title: string
+  lens: string
+  source: string
+  sourceUrl?: string
+  outcome: string
+  coolNote: string
+  boardroomSentence: string
+  termsToSteal: string[]
+  termsToAvoid: string[]
+  drill: string
 }
 
 export type ExecutiveLens = {
@@ -41,7 +55,7 @@ export const courseLevels: CourseLevel[] = [
     ],
     outcome:
       'Explain a complex idea without hiding inside technical, architecture, or framework-first language.',
-    status: 'Designed',
+    status: 'Live',
   },
   {
     level: 'Level 200',
@@ -77,6 +91,121 @@ export const courseLevels: CourseLevel[] = [
     outcome:
       'Present a concise recommendation, defend it against executive objections, and leave with a boardroom-ready artefact.',
     status: 'Planned',
+  },
+]
+
+export const level100Modules: Level100Module[] = [
+  {
+    id: '100.1',
+    title: 'Executive Thinking',
+    lens: 'Decision clarity',
+    source: 'Global executive education / business-school public material',
+    outcome: 'Explain a complex idea as an executive decision, not as a technical explanation.',
+    coolNote:
+      'Executives do not primarily reward depth. They reward clarity under pressure: decision, value, risk, evidence, owner, and next action.',
+    boardroomSentence:
+      'The decision is not about the model; it is about whether we can move with confidence, evidence, and ownership.',
+    termsToSteal: ['decision required', 'trade-off', 'execution confidence'],
+    termsToAvoid: ['artefact maturity', 'capability taxonomy', 'technical elegance'],
+    drill:
+      'Describe a technical idea and convert it into decision, value, risk, evidence, and action.',
+  },
+  {
+    id: '100.2',
+    title: 'Strategy Without Architecture Jargon',
+    lens: 'CEO / Strategy',
+    source: 'McKinsey Live',
+    sourceUrl:
+      'https://www.mckinsey.com/featured-insights/mckinsey-live/webinars/from-strategy-to-performance-how-leaders-can-build-an-operating-model-that-works',
+    outcome: 'Speak about strategy as movement from intent to performance.',
+    coolNote:
+      'Strategy fails when the organisation cannot convert intent into coordinated execution. The useful question is where value leaks between decision, ownership, funding, and delivery.',
+    boardroomSentence:
+      'You do not have a strategy problem yet; you have a strategy-to-execution conversion problem.',
+    termsToSteal: ['value leakage', 'decision velocity', 'operating model'],
+    termsToAvoid: ['reference architecture first', 'capability map first', 'governance forum design'],
+    drill:
+      'A CEO says: we need to go to market with velocity. Answer in strategy execution language, not architecture language.',
+  },
+  {
+    id: '100.3',
+    title: 'Finance for Non-Finance Leaders',
+    lens: 'CFO / Finance',
+    source: 'Coursera / University of California, Irvine',
+    sourceUrl: 'https://www.coursera.org/learn/finance-for-non-financial-managers',
+    outcome: 'Translate a proposal into cost, return, risk-adjusted value, funding sequence, and financial confidence.',
+    coolNote:
+      'A CFO does not fund better architecture. A CFO funds a credible investment case with cost, return, risk, control, and measurable value.',
+    boardroomSentence:
+      'The CFO does not need a better architecture story; they need a defensible investment story.',
+    termsToSteal: ['investment case', 'payback period', 'risk-adjusted return'],
+    termsToAvoid: ['platform uplift', 'modernisation value', 'efficiency without measurement'],
+    drill:
+      'Act as the CFO and challenge the proposal on cost, return, funding sequence, and financial control.',
+  },
+  {
+    id: '100.4',
+    title: 'Boardroom Awareness',
+    lens: 'Chair / Board',
+    source: 'Australian Institute of Company Directors',
+    sourceUrl: 'https://www.aicd.com.au/courses-and-programs/all-webinars.html',
+    outcome: 'Distinguish management explanation from board-level decision framing.',
+    coolNote:
+      'The board needs the decision, options, trade-off, risk, assurance, accountability, and consequence. It does not need the operational story first.',
+    boardroomSentence:
+      'The board does not need every detail; it needs enough clarity to govern the decision.',
+    termsToSteal: ['oversight', 'assurance', 'options considered'],
+    termsToAvoid: ['deep dive first', 'technical walkthrough', 'detail as confidence'],
+    drill:
+      'Act as the Chair and challenge the recommendation on decision clarity, options, risk, assurance, and accountability.',
+  },
+  {
+    id: '100.5',
+    title: 'Market Narrative and Commercial Positioning',
+    lens: 'CMO / Growth',
+    source: 'Public marketing and growth strategy material',
+    outcome: 'Explain why the market, buyer, customer, or stakeholder should care about a proposal.',
+    coolNote:
+      'The market buys a pain it recognises, a promise it understands, and enough trust to believe the outcome can be delivered.',
+    boardroomSentence:
+      'If the market cannot repeat the value in its own language, the product is not positioned yet.',
+    termsToSteal: ['market narrative', 'buyer relevance', 'differentiation'],
+    termsToAvoid: ['we built a framework', 'comprehensive capability', 'technical superiority'],
+    drill:
+      'Act as the CMO and challenge the product on market relevance, differentiation, demand, and trust.',
+  },
+  {
+    id: '100.6',
+    title: 'Risk, Security, and Assurance',
+    lens: 'CISO / CRO',
+    source: 'NIST Cybersecurity Framework',
+    sourceUrl: 'https://www.nist.gov/cyberframework',
+    outcome: 'Speak about cyber, risk, and assurance as executive exposure and decision confidence.',
+    coolNote:
+      'Security becomes executive language when exposure, ownership, evidence, residual risk, and assurance are clear.',
+    boardroomSentence:
+      'Security becomes executive language when exposure, ownership, evidence, and residual risk are clear.',
+    termsToSteal: ['exposure', 'residual risk', 'assurance'],
+    termsToAvoid: ['tooling first', 'compliance checkbox', 'we are secure'],
+    drill:
+      'Act as the CISO and CRO and challenge the proposal on exposure, risk appetite, evidence, and assurance.',
+  },
+  {
+    id: '100.7',
+    title: 'Operating Model and Execution Rhythm',
+    lens: 'COO / Operations',
+    source: 'McKinsey Live',
+    sourceUrl:
+      'https://www.mckinsey.com/featured-insights/mckinsey-live/webinars/from-strategy-to-performance-how-leaders-can-build-an-operating-model-that-works',
+    outcome: 'Explain how ownership, cadence, handoffs, measurement, and decision rights turn strategy into execution.',
+    coolNote:
+      'An operating model is how work actually moves: ownership, decision rights, handoffs, cadence, measurement, and escalation.',
+    boardroomSentence:
+      'Execution improves when ownership, handoffs, cadence, and decision rights become explicit.',
+    termsToSteal: ['operating rhythm', 'decision rights', 'repeatability'],
+    termsToAvoid: ['governance theatre', 'committee cadence', 'heroic delivery'],
+    drill:
+      'Act as the COO and challenge the proposal on ownership, cadence, handoffs, repeatability, and scale.',
   },
 ]
 

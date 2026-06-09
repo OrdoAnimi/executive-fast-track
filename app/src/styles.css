@@ -127,7 +127,7 @@ nav {
   color: #11140f;
   border: 1px solid #9f742f;
   padding: 0 20px;
-  height: 40px;
+  height: 44px;
   border-radius: var(--radius);
   text-decoration: none;
   font-size: 13px;
@@ -1188,6 +1188,7 @@ footer {
   .dash-course-header { flex-direction: column; gap: 0.875rem; }
   .dash-course-n { font-size: 40px; }
   .module-card-grid { grid-template-columns: 1fr; }
+  .module-card { padding: 1.375rem; }
   .module-terms { grid-template-columns: 1fr; }
   .track-row { grid-template-columns: 1fr; border-left: none; border-right: none; }
   .track-stage { border-right: none; border-bottom: 1px solid var(--rule-strong); }
@@ -1467,4 +1468,21 @@ footer {
 @media (max-width: 480px) {
   .btn-group { flex-direction: column; align-items: flex-start; }
   .eco-strip { flex-direction: column; align-items: flex-start; gap: 6px; padding: 10px 16px; }
+  section { padding: 40px 1rem; }
+  nav { padding: 0 1rem; }
+  .hero-copy { padding: 56px 1rem 40px; }
+  .hero-panel { padding: 32px 1rem 48px; }
+  h1 { font-size: clamp(36px, 11vw, 48px); }
+  .loop-step { padding: 1.5rem 1.25rem 1.25rem; }
+  .hamburger { min-height: 44px; min-width: 44px; }
+  .mobile-nav-cta { min-height: 44px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

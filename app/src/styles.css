@@ -1086,6 +1086,29 @@ footer {
   margin-top: 0.625rem;
 }
 
+.footer-sources {
+  font-size: 12px;
+  color: rgba(247,242,232,.24);
+  margin-top: 0.875rem;
+  line-height: 1.6;
+  max-width: 420px;
+}
+
+.footer-legal-links {
+  display: flex;
+  gap: 1.25rem;
+  margin-top: 1rem;
+}
+
+.footer-legal-links a {
+  font-size: 12px;
+  color: rgba(247,242,232,.32);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+
+.footer-legal-links a:hover { color: rgba(247,242,232,.72); }
+
 .footer-links {
   display: flex;
   flex-wrap: wrap;

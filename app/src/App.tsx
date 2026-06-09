@@ -16,16 +16,19 @@ const VALOUR_ENTRIES = [
     mode: 'Quick brief',
     when: '10 minutes before a meeting',
     desc: 'Read one executive lens. Pick your boardroom sentence. Walk in with the right language.',
+    content: 'quick-brief',
   },
   {
     mode: 'Full prep',
     when: 'Before a board presentation',
     desc: 'Read all seven mindframes. Build your narrative across each value system. Enter the room ready.',
+    content: 'full-prep',
   },
   {
     mode: 'Live rehearsal',
     when: 'Any time',
     desc: 'Bring a real proposal. Eight executives will test it. Pressure reveals what polish hides.',
+    content: 'live-rehearsal',
   },
 ]
 
@@ -59,6 +62,16 @@ const CLUSTERS = [
     signal: 'This role asks: is the decision clear, the risk owned, and the accountability explicit?',
   },
 ]
+
+function valourUrl(campaign: string, content?: string): string {
+  const params: Record<string, string> = {
+    utm_source: 'eft',
+    utm_medium: 'referral',
+    utm_campaign: campaign,
+  }
+  if (content) params.utm_content = content
+  return `https://www.ordoanimi.com?${new URLSearchParams(params).toString()}`
+}
 
 function navLabel(s: string): string {
   if (s === 'valour') return 'Use VALOUR'
@@ -112,7 +125,7 @@ function App() {
       <div className="eco-strip">
         <span className="eco-strip-label">ZenCloud ecosystem</span>
         <div className="eco-links">
-          <a href="https://www.ordoanimi.com" target="_blank" rel="noreferrer">VALOUR™</a>
+          <a href={valourUrl('eco-strip')} target="_blank" rel="noreferrer">VALOUR™</a>
           <a href="https://velocityarchitectureframework.com" target="_blank" rel="noreferrer">Velocity™</a>
           <a href="https://www.zencloud.com.au" target="_blank" rel="noreferrer">ZenCloud™</a>
         </div>
@@ -134,7 +147,7 @@ function App() {
               </li>
             ))}
           </ul>
-          <a href="https://www.ordoanimi.com" className="nav-cta" target="_blank" rel="noreferrer">
+          <a href={valourUrl('nav-cta')} className="nav-cta" target="_blank" rel="noreferrer">
             Open VALOUR™
           </a>
           <button
@@ -165,7 +178,7 @@ function App() {
             </a>
           ))}
           <a
-            href="https://www.ordoanimi.com"
+            href={valourUrl('mobile-nav')}
             className="mobile-nav-cta"
             onClick={() => setMobileNavOpen(false)}
             target="_blank"
@@ -188,7 +201,7 @@ function App() {
                 Seven executive mindframes. Eight role lenses. One boardroom simulator.
               </p>
               <div className="btn-group">
-                <a href="https://www.ordoanimi.com" className="btn-primary" target="_blank" rel="noreferrer">
+                <a href={valourUrl('hero-cta')} className="btn-primary" target="_blank" rel="noreferrer">
                   Open VALOUR™ →
                 </a>
                 <a href="#foundation" className="btn-outline">Read the field guide</a>
@@ -433,7 +446,7 @@ function App() {
                   <h3>{entry.mode}</h3>
                   <p>{entry.desc}</p>
                   <a
-                    href="https://www.ordoanimi.com"
+                    href={valourUrl('how-to-use', entry.content)}
                     className="mode-cta"
                     target="_blank"
                     rel="noreferrer"
@@ -459,7 +472,7 @@ function App() {
                 Read the field guide first — then take your language into VALOUR™ and defend a real proposal.
               </p>
               <div style={{ marginTop: '2rem' }}>
-                <a href="https://www.ordoanimi.com" className="btn-primary" target="_blank" rel="noreferrer">
+                <a href={valourUrl('simulator-cta')} className="btn-primary" target="_blank" rel="noreferrer">
                   Open VALOUR™ →
                 </a>
               </div>
@@ -492,6 +505,9 @@ function App() {
                 <small>by Ordo Animi</small>
               </span>
               <p className="footer-sub">Know the room before you enter it.</p>
+              <p className="footer-sources">
+                Field guide informed by McKinsey, AICD, NIST Cybersecurity Framework, and public executive education material.
+              </p>
               <div className="footer-links" style={{ marginTop: '1.25rem' }}>
                 <a href="#curriculum">Curriculum</a>
                 <a href="#foundation">Field Guide</a>
@@ -500,10 +516,14 @@ function App() {
                 <a href="#valour">Use VALOUR</a>
                 <a href="#simulator">Simulator</a>
               </div>
+              <div className="footer-legal-links">
+                <a href="/privacy.html" target="_blank" rel="noreferrer">Privacy Policy</a>
+                <a href="mailto:phil@myintenterprises.com">Contact</a>
+              </div>
             </div>
             <div className="footer-cta-block">
               <p className="footer-cta-label">Ready to rehearse?</p>
-              <a href="https://www.ordoanimi.com" className="footer-cta" target="_blank" rel="noreferrer">
+              <a href={valourUrl('footer-cta')} className="footer-cta" target="_blank" rel="noreferrer">
                 Open VALOUR™
               </a>
             </div>

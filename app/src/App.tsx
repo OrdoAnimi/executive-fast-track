@@ -154,7 +154,7 @@ function App() {
                   <span>The VALOUR Loop</span>
                   <span>4 steps</span>
                 </div>
-                <h2>Orient · Frame · Pressure-test · Refine</h2>
+                <p className="hero-panel-loop">Orient · Frame · Pressure-test · Refine</p>
                 <p>Read the room. Translate your proposal. Defend it. Refine it.</p>
                 <div className="hero-panel-divider">
                   <p className="hero-panel-live-label">Field guide live now</p>
@@ -283,7 +283,7 @@ function App() {
             <div className="loop-steps">
               {VALOUR_LOOP.map((step) => (
                 <div className="loop-step" key={step.n}>
-                  <span className="loop-step-n">{step.n}</span>
+                  <span className="loop-step-n" aria-hidden="true">{step.n}</span>
                   <div className="loop-step-body">
                     <strong className="loop-step-label">{step.label}</strong>
                     <p className="loop-step-desc">{step.desc}</p>

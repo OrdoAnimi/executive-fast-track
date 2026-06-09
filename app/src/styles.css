@@ -697,42 +697,63 @@ p { color: var(--muted); line-height: 1.7; }
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 0;
-  border-top: 1px solid var(--rule-strong);
-  border-left: 1px solid var(--rule-strong);
-  margin-top: 3rem;
+  margin-top: 3.5rem;
 }
 
 .loop-step {
-  border-right: 1px solid var(--rule-strong);
-  border-bottom: 1px solid var(--rule-strong);
-  padding: 2rem 1.75rem 1.75rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  position: relative;
+  overflow: hidden;
+  border-top: 2px solid var(--rule-strong);
+  padding: 2.25rem 1.75rem 2rem;
+  transition: border-top-color var(--transition);
 }
 
+.loop-step:hover { border-top-color: var(--gold); }
+
 .loop-step-n {
+  position: absolute;
+  top: -0.75rem;
+  right: 1rem;
   font-family: var(--font-heading);
-  font-size: 52px;
+  font-size: 112px;
   font-weight: 700;
   color: var(--gold);
-  opacity: 0.28;
+  opacity: 0.07;
   line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+
+.loop-step-body {
+  position: relative;
+  z-index: 1;
 }
 
 .loop-step-label {
   font-family: var(--font-heading);
-  font-size: 20px;
-  font-weight: 600;
+  font-size: 22px;
+  font-weight: 700;
   color: var(--ink);
   display: block;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.625rem;
 }
 
 .loop-step-desc {
   font-size: 14px;
   color: var(--muted);
-  line-height: 1.6;
+  line-height: 1.65;
+}
+
+/* ── Hero panel loop line ────────────────────── */
+.hero-panel-loop {
+  font-family: var(--font-heading);
+  font-size: clamp(16px, 1.8vw, 20px);
+  font-weight: 600;
+  color: rgba(247,242,232,.78);
+  line-height: 1.4;
+  margin-bottom: 0.75rem;
+  font-style: italic;
 }
 
 .step-number {

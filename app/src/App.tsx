@@ -16,26 +16,54 @@ const VALOUR_ENTRIES = [
     mode: 'Quick brief',
     when: '10 minutes before a meeting',
     desc: 'Read one executive lens. Pick your boardroom sentence. Walk in with the right language.',
-    cta: 'Open VALOUR™ →',
   },
   {
     mode: 'Full prep',
     when: 'Before a board presentation',
     desc: 'Read all seven mindframes. Build your narrative across each value system. Enter the room ready.',
-    cta: 'Open VALOUR™ →',
   },
   {
     mode: 'Live rehearsal',
     when: 'Any time',
     desc: 'Bring a real proposal. Eight executives will test it. Pressure reveals what polish hides.',
-    cta: 'Open VALOUR™ →',
+  },
+]
+
+const CLUSTERS = [
+  {
+    name: 'Growth & Market',
+    accent: 'growth',
+    roles: ['CEO', 'CMO'],
+    theme: 'Win and sustain relevance.',
+    signal: 'These roles ask: does it matter to the market, and will it move?',
+  },
+  {
+    name: 'Capital & Risk',
+    accent: 'capital',
+    roles: ['CFO', 'CISO', 'CRO'],
+    theme: 'Protect the balance sheet. Evidence the exposure.',
+    signal: 'These roles ask: can we afford it, and can we evidence the risk we are accepting?',
+  },
+  {
+    name: 'Operations & Delivery',
+    accent: 'ops',
+    roles: ['COO', 'CIO'],
+    theme: 'Make it work. Make it scale.',
+    signal: 'These roles ask: who owns it, how does it run, and can it survive at scale?',
+  },
+  {
+    name: 'Governance',
+    accent: 'gov',
+    roles: ['Chair'],
+    theme: 'Oversight, accountability, and stakeholder confidence.',
+    signal: 'This role asks: is the decision clear, the risk owned, and the accountability explicit?',
   },
 ]
 
 function App() {
   const [activeSection, setActiveSection] = useState('home')
   const [expandedModules, setExpandedModules] = useState<Set<string>>(new Set())
-  const [expandedLenses, setExpandedLenses] = useState<Set<string>>(new Set())
+  const [expandedClusters, setExpandedClusters] = useState<Set<string>>(new Set())
 
   useEffect(() => {
     const sections = document.querySelectorAll('section[id]')
@@ -55,10 +83,10 @@ function App() {
     })
   }
 
-  function toggleLens(role: string) {
-    setExpandedLenses(prev => {
+  function toggleCluster(name: string) {
+    setExpandedClusters(prev => {
       const next = new Set(prev)
-      if (next.has(role)) { next.delete(role) } else { next.add(role) }
+      if (next.has(name)) { next.delete(name) } else { next.add(name) }
       return next
     })
   }
@@ -86,7 +114,7 @@ function App() {
             {NAV_SECTIONS.map(s => (
               <li key={s}>
                 <a href={`#${s}`} className={activeSection === s ? 'nav-active' : ''}>
-                  {s === 'valour' ? 'How to Use VALOUR' : s.charAt(0).toUpperCase() + s.slice(1)}
+                  {s === 'valour' ? 'Use VALOUR' : s.charAt(0).toUpperCase() + s.slice(1)}
                 </a>
               </li>
             ))}
@@ -181,9 +209,7 @@ function App() {
                       <strong>{level.outcome}</strong>
                     </div>
                     {level.status === 'Live' && (
-                      <a href="#foundation" className="level-cta">
-                        Read the field guide ↓
-                      </a>
+                      <a href="#foundation" className="level-cta">Read the field guide ↓</a>
                     )}
                   </article>
                 )
@@ -192,13 +218,13 @@ function App() {
           </div>
         </section>
 
-        {/* ── Foundation mindframes ──────────── */}
+        {/* ── Field Guide ───────────────────── */}
         <section id="foundation" className="section-alt">
           <div className="container">
             <p className="section-label">Field Guide</p>
             <h2>Seven mindframes.</h2>
             <p className="intro-text">
-              Each mindframe maps how an executive thinks under pressure — what they protect, fear, and reward.
+              Each entry maps how an executive thinks under pressure — what they protect, fear, and reward.
               Open one to read the full briefing.
             </p>
             <div className="module-card-grid">
@@ -207,38 +233,29 @@ function App() {
                 return (
                   <article className="module-card" key={module.id}>
                     <div className="module-topline">
-                      <span className="module-id">{module.id}</span>
                       <span className="badge badge-seed">{module.lens}</span>
                     </div>
                     <h3>{module.title}</h3>
                     <p className="module-outcome">{module.outcome}</p>
                     {isExpanded && (
                       <>
-                        <div className="module-section">
-                          <p className="mini-label">Key insight</p>
+                        <div className="mindframe-block">
+                          <p className="mini-label">The mindframe</p>
                           <p>{module.coolNote}</p>
                         </div>
-                        <div className="module-section boardroom-sentence">
-                          <p className="mini-label">Boardroom sentence</p>
-                          <strong>{module.boardroomSentence}</strong>
-                        </div>
-                        <div className="module-terms">
-                          <div>
-                            <p className="mini-label">Deploy</p>
-                            <div className="term-row">
-                              {module.termsToSteal.map((term) => <span key={term}>{term}</span>)}
-                            </div>
-                          </div>
-                          <div>
-                            <p className="mini-label avoid-label">Retire</p>
-                            <div className="term-row avoid-row">
-                              {module.termsToAvoid.map((term) => <span key={term}>{term}</span>)}
-                            </div>
+                        <div className="mindframe-block mindframe-say">
+                          <p className="mini-label">Say this</p>
+                          <strong className="boardroom-line">{module.boardroomSentence}</strong>
+                          <div className="term-row" style={{ marginTop: '0.75rem' }}>
+                            {module.termsToSteal.map((term) => <span key={term}>{term}</span>)}
                           </div>
                         </div>
-                        <div className="drill-box">
-                          <p className="mini-label">Practice prompt</p>
-                          <p>{module.drill}</p>
+                        <div className="mindframe-block">
+                          <p className="mini-label avoid-label">Not this</p>
+                          <div className="term-row avoid-row">
+                            {module.termsToAvoid.map((term) => <span key={term}>{term}</span>)}
+                          </div>
+                          <p className="field-drill">{module.drill}</p>
                         </div>
                       </>
                     )}
@@ -255,7 +272,7 @@ function App() {
           </div>
         </section>
 
-        {/* ── Method / VALOUR Loop ──────────── */}
+        {/* ── VALOUR Loop ───────────────────── */}
         <section id="method">
           <div className="container">
             <p className="section-label">Method</p>
@@ -277,51 +294,66 @@ function App() {
           </div>
         </section>
 
-        {/* ── Lenses ────────────────────────── */}
+        {/* ── Executive Clusters ────────────── */}
         <section id="lenses" className="section-alt">
           <div className="container">
             <p className="section-label">Executive Lenses</p>
-            <h2>Eight roles. Eight value systems.</h2>
+            <h2>Four clusters. Eight roles.</h2>
             <p className="intro-text">
-              Know what each role protects, fears, and rewards before you speak.
+              Executives share value systems within clusters. Know the cluster first — then the role.
             </p>
-            <div className="cards-grid">
-              {executiveLenses.map((lens) => {
-                const isExpanded = expandedLenses.has(lens.role)
+            <div className="cluster-grid">
+              {CLUSTERS.map((cluster) => {
+                const isExpanded = expandedClusters.has(cluster.name)
+                const clusterLenses = executiveLenses.filter(l => cluster.roles.includes(l.role))
                 return (
-                  <article className="card" key={lens.role}>
-                    <div className="card-head">
-                      <h3>{lens.role}</h3>
-                      <span className="badge badge-planned">Lens</span>
+                  <article className={`cluster-card cluster-${cluster.accent}`} key={cluster.name}>
+                    <div className="cluster-header">
+                      <div className="cluster-header-left">
+                        <h3 className="cluster-name">{cluster.name}</h3>
+                        <p className="cluster-theme">{cluster.theme}</p>
+                      </div>
+                      <div className="cluster-roles-strip">
+                        {cluster.roles.map(r => <span key={r}>{r}</span>)}
+                      </div>
                     </div>
-                    <p className="lens-mandate">{lens.mandate}</p>
+                    <p className="cluster-signal">{cluster.signal}</p>
                     {isExpanded && (
-                      <>
-                        <div className="lens-block">
-                          <p className="mini-label">Protects</p>
-                          <p>{lens.values}</p>
-                        </div>
-                        <div className="lens-block">
-                          <p className="mini-label">Fears</p>
-                          <p>{lens.fear}</p>
-                        </div>
-                        <div className="lens-block">
-                          <p className="mini-label">Response pattern</p>
-                          <p>{lens.responsePattern}</p>
-                        </div>
-                        <div className="lens-block">
-                          <p className="mini-label avoid-label">Avoid saying</p>
-                          <div className="term-row avoid-row">
-                            {lens.weakLanguage.slice(0, 3).map((term) => <span key={term}>{term}</span>)}
+                      <div className="cluster-roles-detail">
+                        {clusterLenses.map((lens, i) => (
+                          <div className={`role-entry${i > 0 ? ' role-entry-ruled' : ''}`} key={lens.role}>
+                            <div className="role-entry-head">
+                              <strong className="role-entry-name">{lens.role}</strong>
+                              <span className="role-entry-mandate">{lens.mandate}</span>
+                            </div>
+                            <div className="role-3block">
+                              <div className="role-block">
+                                <p className="mini-label">Protects</p>
+                                <p>{lens.values}</p>
+                              </div>
+                              <div className="role-block">
+                                <p className="mini-label">Fears</p>
+                                <p>{lens.fear}</p>
+                              </div>
+                              <div className="role-block">
+                                <p className="mini-label">Wins them over</p>
+                                <p>{lens.responsePattern}</p>
+                              </div>
+                            </div>
+                            <div className="role-language">
+                              <div className="term-row">
+                                {lens.language.slice(0, 4).map(t => <span key={t}>{t}</span>)}
+                              </div>
+                              <div className="term-row avoid-row" style={{ marginTop: '0.4rem' }}>
+                                {lens.weakLanguage.slice(0, 2).map(t => <span key={t}>{t}</span>)}
+                              </div>
+                            </div>
                           </div>
-                        </div>
-                      </>
+                        ))}
+                      </div>
                     )}
-                    <div className="term-row" style={{ marginTop: '0.75rem' }}>
-                      {lens.language.slice(0, 3).map((term) => <span key={term}>{term}</span>)}
-                    </div>
-                    <button className="lens-toggle-btn" onClick={() => toggleLens(lens.role)}>
-                      {isExpanded ? 'Less ↑' : 'Full lens →'}
+                    <button className="cluster-toggle-btn" onClick={() => toggleCluster(cluster.name)}>
+                      {isExpanded ? 'Close cluster ↑' : `Open ${cluster.roles.length > 1 ? cluster.roles.length + ' roles' : 'lens'} →`}
                     </button>
                   </article>
                 )
@@ -350,7 +382,7 @@ function App() {
                     target="_blank"
                     rel="noreferrer"
                   >
-                    {entry.cta}
+                    Open VALOUR™ →
                   </a>
                 </article>
               ))}
@@ -383,7 +415,7 @@ function App() {
               </div>
               <div className="dash-summary-next">
                 <p className="dash-summary-text">
-                  CEO, CFO, CIO, COO, CMO, CISO/CRO, Chair — each testing your proposal from a different value system.
+                  CEO, CFO, CIO, COO, CMO, CISO, CRO, and Chair — each testing your proposal from a different value system.
                 </p>
                 <p style={{ fontSize: '11px', color: 'rgba(247,242,232,.36)', marginTop: '0.75rem', letterSpacing: '.04em' }}>
                   Read all seven mindframes before you enter.
@@ -409,7 +441,7 @@ function App() {
                 <a href="#foundation">Field Guide</a>
                 <a href="#method">The Loop</a>
                 <a href="#lenses">Lenses</a>
-                <a href="#valour">How to Use VALOUR</a>
+                <a href="#valour">Use VALOUR</a>
                 <a href="#simulator">Simulator</a>
               </div>
             </div>

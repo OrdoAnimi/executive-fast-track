@@ -2,29 +2,70 @@ import { useState, useEffect } from 'react'
 import { copilotModes, courseLevels, executiveLenses, level100Modules } from './data'
 
 const TRACK_NAMES = ['Foundation', 'Translation', 'Simulation']
-
 const NAV_SECTIONS = ['curriculum', 'foundation', 'method', 'lenses', 'copilot', 'simulator']
+const REVIEWED_KEY = 'eft:reviewed-modules'
+
+function loadReviewed(): Set<string> {
+  try {
+    const saved = localStorage.getItem(REVIEWED_KEY)
+    return saved ? new Set(JSON.parse(saved) as string[]) : new Set()
+  } catch {
+    return new Set()
+  }
+}
+
+function saveReviewed(ids: Set<string>) {
+  try { localStorage.setItem(REVIEWED_KEY, JSON.stringify([...ids])) } catch { /* quota */ }
+}
 
 function App() {
   const [activeSection, setActiveSection] = useState('home')
+  const [expandedModules, setExpandedModules] = useState<Set<string>>(new Set())
+  const [reviewedModules, setReviewedModules] = useState<Set<string>>(loadReviewed)
+  const [expandedLenses, setExpandedLenses] = useState<Set<string>>(new Set())
+
+  const reviewedCount = reviewedModules.size
+  const totalModules = level100Modules.length
+  const allReviewed = reviewedCount === totalModules
 
   useEffect(() => {
     const sections = document.querySelectorAll('section[id]')
     const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(e => {
-          if (e.isIntersecting) setActiveSection(e.target.id)
-        })
-      },
+      (entries) => { entries.forEach(e => { if (e.isIntersecting) setActiveSection(e.target.id) }) },
       { rootMargin: '-82px 0px -55% 0px', threshold: 0 }
     )
     sections.forEach(s => observer.observe(s))
     return () => observer.disconnect()
   }, [])
 
+  function toggleModule(id: string) {
+    setExpandedModules(prev => {
+      const next = new Set(prev)
+      if (next.has(id)) { next.delete(id) } else { next.add(id) }
+      return next
+    })
+  }
+
+  function toggleReviewed(id: string) {
+    setReviewedModules(prev => {
+      const next = new Set(prev)
+      if (next.has(id)) { next.delete(id) } else { next.add(id) }
+      saveReviewed(next)
+      return next
+    })
+  }
+
+  function toggleLens(role: string) {
+    setExpandedLenses(prev => {
+      const next = new Set(prev)
+      if (next.has(role)) { next.delete(role) } else { next.add(role) }
+      return next
+    })
+  }
+
   return (
     <>
-      {/* ── Ecosystem strip ──────────────────── */}
+      {/* ── Ecosystem strip ───────────────── */}
       <div className="eco-strip">
         <span className="eco-strip-label">ZenCloud ecosystem</span>
         <div className="eco-links">
@@ -34,20 +75,17 @@ function App() {
         </div>
       </div>
 
-      {/* ── Navigation ───────────────────────── */}
+      {/* ── Navigation ────────────────────── */}
       <nav>
         <div className="nav-inner">
           <a href="#home" className="nav-brand">
             Executive Fast Track
-            <small>by Velocity Architecture</small>
+            <small>by Ordo Animi</small>
           </a>
           <ul className="nav-links">
             {NAV_SECTIONS.map(s => (
               <li key={s}>
-                <a
-                  href={`#${s}`}
-                  className={activeSection === s ? 'nav-active' : ''}
-                >
+                <a href={`#${s}`} className={activeSection === s ? 'nav-active' : ''}>
                   {s.charAt(0).toUpperCase() + s.slice(1)}
                 </a>
               </li>
@@ -59,7 +97,7 @@ function App() {
 
       <main>
 
-        {/* ── Hero ─────────────────────────────── */}
+        {/* ── Hero ──────────────────────────── */}
         <section id="home" className="hero">
           <div className="hero-layout">
             <div className="hero-copy">
@@ -95,7 +133,7 @@ function App() {
           </div>
         </section>
 
-        {/* ── Curriculum ───────────────────────── */}
+        {/* ── Curriculum ────────────────────── */}
         <section id="curriculum">
           <div className="container">
             <p className="section-label">Curriculum</p>
@@ -138,6 +176,11 @@ function App() {
                       <p className="dash-cert-label">You leave with</p>
                       <strong>{level.outcome}</strong>
                     </div>
+                    {level.status === 'Live' && (
+                      <a href="#foundation" className="level-cta">
+                        Begin Foundation ↓
+                      </a>
+                    )}
                   </article>
                 )
               })}
@@ -145,61 +188,114 @@ function App() {
           </div>
         </section>
 
-        {/* ── Foundation modules ───────────────── */}
+        {/* ── Foundation modules ─────────────── */}
         <section id="foundation" className="section-alt">
           <div className="container">
             <p className="section-label">Foundation</p>
             <h2>Seven modules.</h2>
-            <p className="intro-text">Each module builds one executive skill.</p>
-            <div className="module-card-grid">
-              {level100Modules.map((module) => (
-                <article className="module-card" key={module.id}>
-                  <div className="module-topline">
-                    <span className="module-id">{module.id}</span>
-                    <span className="badge badge-seed">{module.lens}</span>
-                  </div>
-                  <h3>{module.title}</h3>
-                  <p className="module-outcome">{module.outcome}</p>
-                  <div className="module-section">
-                    <p className="mini-label">Key insight</p>
-                    <p>{module.coolNote}</p>
-                  </div>
-                  <div className="module-section boardroom-sentence">
-                    <p className="mini-label">Boardroom sentence</p>
-                    <strong>{module.boardroomSentence}</strong>
-                  </div>
-                  <div className="module-terms">
-                    <div>
-                      <p className="mini-label">Deploy</p>
-                      <div className="term-row">
-                        {module.termsToSteal.map((term) => <span key={term}>{term}</span>)}
-                      </div>
-                    </div>
-                    <div>
-                      <p className="mini-label avoid-label">Retire</p>
-                      <div className="term-row avoid-row">
-                        {module.termsToAvoid.map((term) => <span key={term}>{term}</span>)}
-                      </div>
-                    </div>
-                  </div>
-                  <div className="drill-box">
-                    <p className="mini-label">Practice prompt</p>
-                    <p>{module.drill}</p>
-                  </div>
-                  {module.sourceUrl ? (
-                    <a className="module-link" href={module.sourceUrl} target="_blank" rel="noreferrer">
-                      Open learning anchor →
-                    </a>
-                  ) : (
-                    <span className="module-link muted-link">Learning anchor in curation</span>
-                  )}
-                </article>
-              ))}
+            <p className="intro-text">
+              Open a module to read the key insight, boardroom sentence, vocabulary, and practice prompt.
+            </p>
+
+            {/* Progress strip */}
+            <div className="module-progress">
+              <div className="module-progress-bar">
+                <div className="module-progress-fill" style={{ width: `${(reviewedCount / totalModules) * 100}%` }} />
+              </div>
+              <span className={`module-progress-count${allReviewed ? ' is-complete' : ''}`}>
+                {allReviewed ? '✓ All modules reviewed' : `${reviewedCount} of ${totalModules} reviewed`}
+              </span>
             </div>
+
+            <div className="module-card-grid">
+              {level100Modules.map((module) => {
+                const isExpanded = expandedModules.has(module.id)
+                const isReviewed = reviewedModules.has(module.id)
+                return (
+                  <article
+                    className={`module-card${isReviewed ? ' is-reviewed' : ''}`}
+                    key={module.id}
+                  >
+                    <div className="module-topline">
+                      <span className="module-id">{module.id}</span>
+                      <span className="badge badge-seed">{module.lens}</span>
+                    </div>
+                    <h3>{module.title}</h3>
+                    <p className="module-outcome">{module.outcome}</p>
+
+                    {isExpanded && (
+                      <>
+                        <div className="module-section">
+                          <p className="mini-label">Key insight</p>
+                          <p>{module.coolNote}</p>
+                        </div>
+                        <div className="module-section boardroom-sentence">
+                          <p className="mini-label">Boardroom sentence</p>
+                          <strong>{module.boardroomSentence}</strong>
+                        </div>
+                        <div className="module-terms">
+                          <div>
+                            <p className="mini-label">Deploy</p>
+                            <div className="term-row">
+                              {module.termsToSteal.map((term) => <span key={term}>{term}</span>)}
+                            </div>
+                          </div>
+                          <div>
+                            <p className="mini-label avoid-label">Retire</p>
+                            <div className="term-row avoid-row">
+                              {module.termsToAvoid.map((term) => <span key={term}>{term}</span>)}
+                            </div>
+                          </div>
+                        </div>
+                        <div className="drill-box">
+                          <p className="mini-label">Practice prompt</p>
+                          <p>{module.drill}</p>
+                        </div>
+                        {module.sourceUrl ? (
+                          <a className="module-link" href={module.sourceUrl} target="_blank" rel="noreferrer">
+                            Open learning anchor →
+                          </a>
+                        ) : (
+                          <span className="module-link muted-link">Learning anchor in curation</span>
+                        )}
+                      </>
+                    )}
+
+                    <div className="module-card-actions">
+                      <button
+                        className={`module-card-btn${isReviewed ? ' is-reviewed' : ''}`}
+                        onClick={() => toggleReviewed(module.id)}
+                      >
+                        {isReviewed ? '✓ Reviewed' : 'Mark reviewed'}
+                      </button>
+                      <button
+                        className="module-card-btn btn-open"
+                        onClick={() => toggleModule(module.id)}
+                      >
+                        {isExpanded ? 'Collapse ↑' : 'Open →'}
+                      </button>
+                    </div>
+                  </article>
+                )
+              })}
+            </div>
+
+            {/* Completion bridge to VALOUR */}
+            {allReviewed && (
+              <div className="completion-cta">
+                <div className="completion-cta-text">
+                  <p className="completion-cta-title">Foundation complete. Take your language into the boardroom.</p>
+                  <span className="completion-cta-sub">Open VALOUR™ to rehearse a live proposal with AI executives.</span>
+                </div>
+                <a href="https://www.ordoanimi.com" className="btn-primary" target="_blank" rel="noreferrer">
+                  Open VALOUR™ →
+                </a>
+              </div>
+            )}
           </div>
         </section>
 
-        {/* ── Method ───────────────────────────── */}
+        {/* ── Method ────────────────────────── */}
         <section id="method">
           <div className="container split-layout">
             <div>
@@ -227,7 +323,7 @@ function App() {
           </div>
         </section>
 
-        {/* ── Lenses ───────────────────────────── */}
+        {/* ── Lenses ────────────────────────── */}
         <section id="lenses" className="section-alt">
           <div className="container">
             <p className="section-label">Lenses</p>
@@ -236,31 +332,51 @@ function App() {
               Know what each role protects, fears, and rewards before you speak.
             </p>
             <div className="cards-grid">
-              {executiveLenses.map((lens) => (
-                <article className="card" key={lens.role}>
-                  <div className="card-head">
-                    <h3>{lens.role}</h3>
-                    <span className="badge badge-planned">Lens</span>
-                  </div>
-                  <p className="lens-mandate">{lens.mandate}</p>
-                  <div className="lens-block">
-                    <p className="mini-label">Protects</p>
-                    <p>{lens.values}</p>
-                  </div>
-                  <div className="lens-block">
-                    <p className="mini-label">Fears</p>
-                    <p>{lens.fear}</p>
-                  </div>
-                  <div className="term-row">
-                    {lens.language.slice(0, 3).map((term) => <span key={term}>{term}</span>)}
-                  </div>
-                </article>
-              ))}
+              {executiveLenses.map((lens) => {
+                const isExpanded = expandedLenses.has(lens.role)
+                return (
+                  <article className="card" key={lens.role}>
+                    <div className="card-head">
+                      <h3>{lens.role}</h3>
+                      <span className="badge badge-planned">Lens</span>
+                    </div>
+                    <p className="lens-mandate">{lens.mandate}</p>
+                    {isExpanded && (
+                      <>
+                        <div className="lens-block">
+                          <p className="mini-label">Protects</p>
+                          <p>{lens.values}</p>
+                        </div>
+                        <div className="lens-block">
+                          <p className="mini-label">Fears</p>
+                          <p>{lens.fear}</p>
+                        </div>
+                        <div className="lens-block">
+                          <p className="mini-label">Response pattern</p>
+                          <p>{lens.responsePattern}</p>
+                        </div>
+                        <div className="lens-block">
+                          <p className="mini-label avoid-label">Avoid saying</p>
+                          <div className="term-row avoid-row">
+                            {lens.weakLanguage.slice(0, 3).map((term) => <span key={term}>{term}</span>)}
+                          </div>
+                        </div>
+                      </>
+                    )}
+                    <div className="term-row" style={{ marginTop: '0.75rem' }}>
+                      {lens.language.slice(0, 3).map((term) => <span key={term}>{term}</span>)}
+                    </div>
+                    <button className="lens-toggle-btn" onClick={() => toggleLens(lens.role)}>
+                      {isExpanded ? 'Less ↑' : 'Full lens →'}
+                    </button>
+                  </article>
+                )
+              })}
             </div>
           </div>
         </section>
 
-        {/* ── Copilot ──────────────────────────── */}
+        {/* ── Copilot ───────────────────────── */}
         <section id="copilot" className="section-dark">
           <div className="container">
             <p className="section-label">Copilot</p>
@@ -275,13 +391,21 @@ function App() {
                   <div className="mode-output">
                     {mode.output.map((item) => <span key={item}>{item}</span>)}
                   </div>
+                  <a
+                    href="https://www.ordoanimi.com"
+                    className="mode-cta"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Open in VALOUR™ →
+                  </a>
                 </article>
               ))}
             </div>
           </div>
         </section>
 
-        {/* ── Resources ────────────────────────── */}
+        {/* ── Resources ─────────────────────── */}
         <section id="resources">
           <div className="container">
             <p className="section-label">Resources</p>
@@ -307,7 +431,7 @@ function App() {
           </div>
         </section>
 
-        {/* ── Simulator ────────────────────────── */}
+        {/* ── Simulator ─────────────────────── */}
         <section id="simulator" className="section-dark">
           <div className="container simulator-panel">
             <div>
@@ -315,6 +439,9 @@ function App() {
               <h2>Bring a live proposal.</h2>
               <p className="intro-text">
                 Seven executives. Competing value systems. Real room pressure.
+              </p>
+              <p style={{ marginTop: '1rem', fontSize: '15px', color: 'rgba(247,242,232,.48)' }}>
+                Complete Foundation first — then take your language into VALOUR™ and defend a real proposal.
               </p>
               <div style={{ marginTop: '2rem' }}>
                 <a href="https://www.ordoanimi.com" className="btn-primary" target="_blank" rel="noreferrer">
@@ -332,8 +459,11 @@ function App() {
                   CEO, CFO, CIO, COO, CMO, CISO/CRO, and Chair — each testing your proposal from a different value system.
                 </p>
                 <div className="dash-progress-bar dash-summary-bar">
-                  <div className="dash-progress-fill" style={{ width: '66%' }} />
+                  <div className="dash-progress-fill" style={{ width: `${(reviewedCount / totalModules) * 100}%` }} />
                 </div>
+                <p style={{ fontSize: '11px', color: 'rgba(247,242,232,.36)', marginTop: '0.5rem', letterSpacing: '.04em' }}>
+                  {reviewedCount} of {totalModules} modules reviewed
+                </p>
               </div>
             </div>
           </div>
@@ -347,7 +477,7 @@ function App() {
             <div className="footer-brand-block">
               <span className="footer-brand">
                 Executive Fast Track
-                <small>by Velocity Architecture</small>
+                <small>by Ordo Animi</small>
               </span>
               <p className="footer-sub">C-suite fluency and boardroom command.</p>
               <div className="footer-links" style={{ marginTop: '1.25rem' }}>
@@ -366,7 +496,7 @@ function App() {
               </a>
             </div>
           </div>
-          <p className="footer-bottom">© 2026 Velocity Architecture · ZenCloud Global Consultants</p>
+          <p className="footer-bottom">© 2026 Ordo Animi · ZenCloud Global Consultants</p>
         </div>
       </footer>
     </>

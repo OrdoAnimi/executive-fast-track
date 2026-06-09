@@ -1,20 +1,57 @@
+import { useState, useEffect } from 'react'
 import { copilotModes, courseLevels, executiveLenses, level100Modules } from './data'
 
 const TRACK_NAMES = ['Foundation', 'Translation', 'Simulation']
 
+const NAV_SECTIONS = ['curriculum', 'foundation', 'method', 'lenses', 'copilot', 'simulator']
+
 function App() {
+  const [activeSection, setActiveSection] = useState('home')
+
+  useEffect(() => {
+    const sections = document.querySelectorAll('section[id]')
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) setActiveSection(e.target.id)
+        })
+      },
+      { rootMargin: '-82px 0px -55% 0px', threshold: 0 }
+    )
+    sections.forEach(s => observer.observe(s))
+    return () => observer.disconnect()
+  }, [])
+
   return (
     <>
+      {/* ── Ecosystem strip ──────────────────── */}
+      <div className="eco-strip">
+        <span className="eco-strip-label">ZenCloud ecosystem</span>
+        <div className="eco-links">
+          <a href="https://www.ordoanimi.com" target="_blank" rel="noreferrer">VALOUR™</a>
+          <a href="https://velocityarchitectureframework.com" target="_blank" rel="noreferrer">Velocity™</a>
+          <a href="https://www.zencloud.com.au" target="_blank" rel="noreferrer">ZenCloud™</a>
+        </div>
+      </div>
+
+      {/* ── Navigation ───────────────────────── */}
       <nav>
         <div className="nav-inner">
-          <a href="#home" className="nav-brand">Executive Fast Track</a>
+          <a href="#home" className="nav-brand">
+            Executive Fast Track
+            <small>by Velocity Architecture</small>
+          </a>
           <ul className="nav-links">
-            <li><a href="#curriculum">Curriculum</a></li>
-            <li><a href="#foundation">Foundation</a></li>
-            <li><a href="#method">Method</a></li>
-            <li><a href="#lenses">Lenses</a></li>
-            <li><a href="#copilot">Copilot</a></li>
-            <li><a href="#simulator">Simulator</a></li>
+            {NAV_SECTIONS.map(s => (
+              <li key={s}>
+                <a
+                  href={`#${s}`}
+                  className={activeSection === s ? 'nav-active' : ''}
+                >
+                  {s.charAt(0).toUpperCase() + s.slice(1)}
+                </a>
+              </li>
+            ))}
           </ul>
           <a href="#foundation" className="nav-cta">Begin</a>
         </div>
@@ -22,31 +59,43 @@ function App() {
 
       <main>
 
-        {/* ── Hero ─────────────────────────────────────────── */}
+        {/* ── Hero ─────────────────────────────── */}
         <section id="home" className="hero">
-          <div className="container hero-layout">
-            <div>
-              <div className="hero-bar" />
-              <p className="section-label">Velocity Architecture</p>
-              <h1>C-suite fluency.<br />Boardroom command.</h1>
-              <p className="hero-copy">
+          <div className="hero-layout">
+            <div className="hero-copy">
+              <p className="hero-eyebrow">Executive Fast Track</p>
+              <h1>C-suite fluency.<br /><em>Boardroom command.</em></h1>
+              <p className="hero-copy-text">
                 Seven modules, eight lenses, one boardroom simulator.
               </p>
               <div className="btn-group">
-                <a href="#foundation" className="btn-primary">Begin</a>
+                <a href="#foundation" className="btn-primary">Begin Foundation</a>
                 <a href="#simulator" className="btn-outline">Open Simulator</a>
               </div>
+              <div className="hero-proof">
+                <span>Foundation live now</span>
+                <span>Eight executive lenses</span>
+                <span>Boardroom simulation</span>
+              </div>
             </div>
-            <div className="hero-panel" aria-label="Curriculum structure">
-              <p className="panel-kicker">Foundation · Translation · Simulation</p>
-              <h2>Three levels.</h2>
-              <div className="panel-rule" />
-              <p>Language first. Lenses second. Boardroom pressure third.</p>
+            <div className="hero-panel">
+              <div className="hero-panel-card">
+                <div className="hero-panel-kicker">
+                  <span>Curriculum</span>
+                  <span>3 levels</span>
+                </div>
+                <h2>Foundation · Translation · Simulation</h2>
+                <p>Language first. Lenses second. Boardroom pressure third.</p>
+                <div className="hero-panel-divider">
+                  <p className="hero-panel-live-label">Currently live</p>
+                  <p className="hero-panel-live-text">Level 100 — Executive Language Foundations</p>
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* ── Curriculum ───────────────────────────────────── */}
+        {/* ── Curriculum ───────────────────────── */}
         <section id="curriculum">
           <div className="container">
             <p className="section-label">Curriculum</p>
@@ -96,7 +145,7 @@ function App() {
           </div>
         </section>
 
-        {/* ── Foundation modules ───────────────────────────── */}
+        {/* ── Foundation modules ───────────────── */}
         <section id="foundation" className="section-alt">
           <div className="container">
             <p className="section-label">Foundation</p>
@@ -150,7 +199,7 @@ function App() {
           </div>
         </section>
 
-        {/* ── Method ───────────────────────────────────────── */}
+        {/* ── Method ───────────────────────────── */}
         <section id="method">
           <div className="container split-layout">
             <div>
@@ -170,7 +219,7 @@ function App() {
                 'Apply in a live scenario',
               ].map((step, index) => (
                 <div className="teach-item" key={step}>
-                  <div className="step-number">{index + 1}</div>
+                  <span className="step-number">0{index + 1}</span>
                   <strong>{step}</strong>
                 </div>
               ))}
@@ -178,7 +227,7 @@ function App() {
           </div>
         </section>
 
-        {/* ── Lenses ───────────────────────────────────────── */}
+        {/* ── Lenses ───────────────────────────── */}
         <section id="lenses" className="section-alt">
           <div className="container">
             <p className="section-label">Lenses</p>
@@ -186,9 +235,9 @@ function App() {
             <p className="intro-text">
               Know what each role protects, fears, and rewards before you speak.
             </p>
-            <div className="cards-grid lens-grid">
+            <div className="cards-grid">
               {executiveLenses.map((lens) => (
-                <article className="card lens-card" key={lens.role}>
+                <article className="card" key={lens.role}>
                   <div className="card-head">
                     <h3>{lens.role}</h3>
                     <span className="badge badge-planned">Lens</span>
@@ -211,7 +260,7 @@ function App() {
           </div>
         </section>
 
-        {/* ── Copilot ──────────────────────────────────────── */}
+        {/* ── Copilot ──────────────────────────── */}
         <section id="copilot" className="section-dark">
           <div className="container">
             <p className="section-label">Copilot</p>
@@ -232,7 +281,7 @@ function App() {
           </div>
         </section>
 
-        {/* ── Resources ────────────────────────────────────── */}
+        {/* ── Resources ────────────────────────── */}
         <section id="resources">
           <div className="container">
             <p className="section-label">Resources</p>
@@ -258,8 +307,8 @@ function App() {
           </div>
         </section>
 
-        {/* ── Simulator ────────────────────────────────────── */}
-        <section id="simulator" className="section-alt">
+        {/* ── Simulator ────────────────────────── */}
+        <section id="simulator" className="section-dark">
           <div className="container simulator-panel">
             <div>
               <p className="section-label">Boardroom Simulator</p>
@@ -267,8 +316,13 @@ function App() {
               <p className="intro-text">
                 Seven executives. Competing value systems. Real room pressure.
               </p>
+              <div style={{ marginTop: '2rem' }}>
+                <a href="https://www.ordoanimi.com" className="btn-primary" target="_blank" rel="noreferrer">
+                  Open VALOUR™ →
+                </a>
+              </div>
             </div>
-            <div className="dash-summary simulator-summary">
+            <div className="dash-summary">
               <div className="dash-summary-score">
                 <div className="dash-summary-count">7</div>
                 <div className="dash-summary-label">executive roles</div>
@@ -289,17 +343,30 @@ function App() {
 
       <footer>
         <div className="footer-inner">
-          <p className="footer-brand">Executive Fast Track</p>
-          <p className="footer-sub">A Velocity Architecture program.</p>
-          <div className="footer-links">
-            <a href="#curriculum">Curriculum</a>
-            <a href="#foundation">Foundation</a>
-            <a href="#method">Method</a>
-            <a href="#lenses">Lenses</a>
-            <a href="#copilot">Copilot</a>
-            <a href="#simulator">Simulator</a>
+          <div className="footer-top">
+            <div className="footer-brand-block">
+              <span className="footer-brand">
+                Executive Fast Track
+                <small>by Velocity Architecture</small>
+              </span>
+              <p className="footer-sub">C-suite fluency and boardroom command.</p>
+              <div className="footer-links" style={{ marginTop: '1.25rem' }}>
+                <a href="#curriculum">Curriculum</a>
+                <a href="#foundation">Foundation</a>
+                <a href="#method">Method</a>
+                <a href="#lenses">Lenses</a>
+                <a href="#copilot">Copilot</a>
+                <a href="#simulator">Simulator</a>
+              </div>
+            </div>
+            <div className="footer-cta-block">
+              <p className="footer-cta-label">Ready to rehearse?</p>
+              <a href="https://www.ordoanimi.com" className="footer-cta" target="_blank" rel="noreferrer">
+                Open VALOUR™
+              </a>
+            </div>
           </div>
-          <p className="footer-bottom">© 2026 Velocity Architecture.</p>
+          <p className="footer-bottom">© 2026 Velocity Architecture · ZenCloud Global Consultants</p>
         </div>
       </footer>
     </>

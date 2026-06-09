@@ -60,10 +60,17 @@ const CLUSTERS = [
   },
 ]
 
+function navLabel(s: string): string {
+  if (s === 'valour') return 'Use VALOUR'
+  if (s === 'foundation') return 'Field Guide'
+  return s.charAt(0).toUpperCase() + s.slice(1)
+}
+
 function App() {
   const [activeSection, setActiveSection] = useState('home')
   const [expandedModules, setExpandedModules] = useState<Set<string>>(new Set())
   const [expandedClusters, setExpandedClusters] = useState<Set<string>>(new Set())
+  const [mobileNavOpen, setMobileNavOpen] = useState(false)
 
   useEffect(() => {
     const sections = document.querySelectorAll('section[id]')
@@ -73,6 +80,14 @@ function App() {
     )
     sections.forEach(s => observer.observe(s))
     return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    function onKey(e: KeyboardEvent) {
+      if (e.key === 'Escape') setMobileNavOpen(false)
+    }
+    document.addEventListener('keydown', onKey)
+    return () => document.removeEventListener('keydown', onKey)
   }, [])
 
   function toggleModule(id: string) {
@@ -104,23 +119,59 @@ function App() {
       </div>
 
       {/* ── Navigation ────────────────────── */}
-      <nav>
+      <nav aria-label="Main navigation">
         <div className="nav-inner">
           <a href="#home" className="nav-brand">
             Executive Fast Track
             <small>by Ordo Animi</small>
           </a>
-          <ul className="nav-links">
+          <ul className="nav-links" role="list">
             {NAV_SECTIONS.map(s => (
               <li key={s}>
                 <a href={`#${s}`} className={activeSection === s ? 'nav-active' : ''}>
-                  {s === 'valour' ? 'Use VALOUR' : s.charAt(0).toUpperCase() + s.slice(1)}
+                  {navLabel(s)}
                 </a>
               </li>
             ))}
           </ul>
           <a href="https://www.ordoanimi.com" className="nav-cta" target="_blank" rel="noreferrer">
             Open VALOUR™
+          </a>
+          <button
+            className={`hamburger${mobileNavOpen ? ' is-open' : ''}`}
+            aria-label={mobileNavOpen ? 'Close navigation menu' : 'Open navigation menu'}
+            aria-expanded={mobileNavOpen}
+            aria-controls="mobile-nav"
+            onClick={() => setMobileNavOpen(prev => !prev)}
+          >
+            <span className="hamburger-line" />
+            <span className="hamburger-line" />
+            <span className="hamburger-line" />
+          </button>
+        </div>
+        <div
+          id="mobile-nav"
+          className={`mobile-nav${mobileNavOpen ? ' is-open' : ''}`}
+          aria-hidden={!mobileNavOpen}
+        >
+          {NAV_SECTIONS.map(s => (
+            <a
+              key={s}
+              href={`#${s}`}
+              className={`mobile-nav-link${activeSection === s ? ' nav-active' : ''}`}
+              onClick={() => setMobileNavOpen(false)}
+            >
+              {navLabel(s)}
+            </a>
+          ))}
+          <a
+            href="https://www.ordoanimi.com"
+            className="mobile-nav-cta"
+            onClick={() => setMobileNavOpen(false)}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Open VALOUR™ →
           </a>
         </div>
       </nav>
@@ -262,6 +313,7 @@ function App() {
                     <button
                       className="module-card-btn btn-open"
                       onClick={() => toggleModule(module.id)}
+                      aria-expanded={isExpanded}
                     >
                       {isExpanded ? 'Collapse ↑' : 'Open →'}
                     </button>
@@ -352,7 +404,11 @@ function App() {
                         ))}
                       </div>
                     )}
-                    <button className="cluster-toggle-btn" onClick={() => toggleCluster(cluster.name)}>
+                    <button
+                      className="cluster-toggle-btn"
+                      onClick={() => toggleCluster(cluster.name)}
+                      aria-expanded={isExpanded}
+                    >
                       {isExpanded ? 'Close cluster ↑' : `Open ${cluster.roles.length > 1 ? cluster.roles.length + ' roles' : 'lens'} →`}
                     </button>
                   </article>

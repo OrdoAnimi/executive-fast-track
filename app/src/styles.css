@@ -692,35 +692,47 @@ p { color: var(--muted); line-height: 1.7; }
   color: #9b3c3c;
 }
 
-/* ── Method / Steps ──────────────────────────── */
-.split-layout {
+/* ── VALOUR Loop ─────────────────────────────── */
+.loop-steps {
   display: grid;
-  grid-template-columns: minmax(0, 0.85fr) minmax(360px, 1.15fr);
-  gap: 5rem;
-  align-items: start;
-}
-
-.learning-steps {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
   border-top: 1px solid var(--rule-strong);
   border-left: 1px solid var(--rule-strong);
+  margin-top: 3rem;
 }
 
-.teach-item {
+.loop-step {
   border-right: 1px solid var(--rule-strong);
   border-bottom: 1px solid var(--rule-strong);
-  padding: 1.25rem 1.5rem;
+  padding: 2rem 1.75rem 1.75rem;
   display: flex;
-  align-items: flex-start;
-  gap: 0.75rem;
+  flex-direction: column;
+  gap: 1rem;
 }
 
-.teach-item strong {
+.loop-step-n {
   font-family: var(--font-heading);
-  font-size: 18px;
-  color: var(--ink);
+  font-size: 52px;
+  font-weight: 700;
+  color: var(--gold);
+  opacity: 0.28;
+  line-height: 1;
+}
+
+.loop-step-label {
+  font-family: var(--font-heading);
+  font-size: 20px;
   font-weight: 600;
+  color: var(--ink);
+  display: block;
+  margin-bottom: 0.4rem;
+}
+
+.loop-step-desc {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.6;
 }
 
 .step-number {
@@ -1031,7 +1043,7 @@ footer {
     padding: 88px 2rem 64px;
   }
   .hero-panel { padding: 56px 2rem 72px; }
-  .split-layout { grid-template-columns: 1fr; gap: 3rem; }
+  .loop-steps { grid-template-columns: 1fr 1fr; }
   .simulator-panel { grid-template-columns: 1fr; gap: 3rem; }
   .lib-grid { grid-template-columns: 1fr 1fr; }
 }
@@ -1050,7 +1062,7 @@ footer {
   .track-row { grid-template-columns: 1fr; border-left: none; border-right: none; }
   .track-stage { border-right: none; border-bottom: 1px solid var(--rule-strong); }
   .track-stage:last-child { border-bottom: none; }
-  .learning-steps { grid-template-columns: 1fr; }
+  .loop-steps { grid-template-columns: 1fr; }
   .lib-grid { grid-template-columns: 1fr; }
   .res-list { grid-template-columns: 1fr; }
   .footer-top { flex-direction: column; }

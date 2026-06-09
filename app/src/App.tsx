@@ -1,32 +1,41 @@
 import { useState, useEffect } from 'react'
-import { copilotModes, courseLevels, executiveLenses, level100Modules } from './data'
+import { courseLevels, executiveLenses, level100Modules } from './data'
 
 const TRACK_NAMES = ['Foundation', 'Translation', 'Simulation']
-const NAV_SECTIONS = ['curriculum', 'foundation', 'method', 'lenses', 'copilot', 'simulator']
-const REVIEWED_KEY = 'eft:reviewed-modules'
+const NAV_SECTIONS = ['curriculum', 'foundation', 'method', 'lenses', 'valour', 'simulator']
 
-function loadReviewed(): Set<string> {
-  try {
-    const saved = localStorage.getItem(REVIEWED_KEY)
-    return saved ? new Set(JSON.parse(saved) as string[]) : new Set()
-  } catch {
-    return new Set()
-  }
-}
+const VALOUR_LOOP = [
+  { n: '01', label: 'Orient', desc: 'Read the room. Know who\'s in it and what they protect.' },
+  { n: '02', label: 'Frame', desc: 'Translate your proposal into their language before you speak.' },
+  { n: '03', label: 'Pressure-test', desc: 'Enter VALOUR and defend it against all eight executives.' },
+  { n: '04', label: 'Refine', desc: 'Take the resistance back to the field guide. Adjust. Re-enter.' },
+]
 
-function saveReviewed(ids: Set<string>) {
-  try { localStorage.setItem(REVIEWED_KEY, JSON.stringify([...ids])) } catch { /* quota */ }
-}
+const VALOUR_ENTRIES = [
+  {
+    mode: 'Quick brief',
+    when: '10 minutes before a meeting',
+    desc: 'Read one executive lens. Pick your boardroom sentence. Walk in with the right language.',
+    cta: 'Open VALOUR™ →',
+  },
+  {
+    mode: 'Full prep',
+    when: 'Before a board presentation',
+    desc: 'Read all seven mindframes. Build your narrative across each value system. Enter the room ready.',
+    cta: 'Open VALOUR™ →',
+  },
+  {
+    mode: 'Live rehearsal',
+    when: 'Any time',
+    desc: 'Bring a real proposal. Eight executives will test it. Pressure reveals what polish hides.',
+    cta: 'Open VALOUR™ →',
+  },
+]
 
 function App() {
   const [activeSection, setActiveSection] = useState('home')
   const [expandedModules, setExpandedModules] = useState<Set<string>>(new Set())
-  const [reviewedModules, setReviewedModules] = useState<Set<string>>(loadReviewed)
   const [expandedLenses, setExpandedLenses] = useState<Set<string>>(new Set())
-
-  const reviewedCount = reviewedModules.size
-  const totalModules = level100Modules.length
-  const allReviewed = reviewedCount === totalModules
 
   useEffect(() => {
     const sections = document.querySelectorAll('section[id]')
@@ -42,15 +51,6 @@ function App() {
     setExpandedModules(prev => {
       const next = new Set(prev)
       if (next.has(id)) { next.delete(id) } else { next.add(id) }
-      return next
-    })
-  }
-
-  function toggleReviewed(id: string) {
-    setReviewedModules(prev => {
-      const next = new Set(prev)
-      if (next.has(id)) { next.delete(id) } else { next.add(id) }
-      saveReviewed(next)
       return next
     })
   }
@@ -86,12 +86,14 @@ function App() {
             {NAV_SECTIONS.map(s => (
               <li key={s}>
                 <a href={`#${s}`} className={activeSection === s ? 'nav-active' : ''}>
-                  {s.charAt(0).toUpperCase() + s.slice(1)}
+                  {s === 'valour' ? 'How to Use VALOUR' : s.charAt(0).toUpperCase() + s.slice(1)}
                 </a>
               </li>
             ))}
           </ul>
-          <a href="#foundation" className="nav-cta">Begin</a>
+          <a href="https://www.ordoanimi.com" className="nav-cta" target="_blank" rel="noreferrer">
+            Open VALOUR™
+          </a>
         </div>
       </nav>
 
@@ -102,31 +104,33 @@ function App() {
           <div className="hero-layout">
             <div className="hero-copy">
               <p className="hero-eyebrow">Executive Fast Track</p>
-              <h1>C-suite fluency.<br /><em>Boardroom command.</em></h1>
+              <h1>Know the room<br /><em>before you enter it.</em></h1>
               <p className="hero-copy-text">
-                Seven modules, eight lenses, one boardroom simulator.
+                Seven executive mindframes. Eight role lenses. One boardroom simulator.
               </p>
               <div className="btn-group">
-                <a href="#foundation" className="btn-primary">Begin Foundation</a>
-                <a href="#simulator" className="btn-outline">Open Simulator</a>
+                <a href="https://www.ordoanimi.com" className="btn-primary" target="_blank" rel="noreferrer">
+                  Open VALOUR™ →
+                </a>
+                <a href="#foundation" className="btn-outline">Read the field guide</a>
               </div>
               <div className="hero-proof">
-                <span>Foundation live now</span>
+                <span>Field guide — free</span>
                 <span>Eight executive lenses</span>
-                <span>Boardroom simulation</span>
+                <span>VALOUR rehearsal</span>
               </div>
             </div>
             <div className="hero-panel">
               <div className="hero-panel-card">
                 <div className="hero-panel-kicker">
-                  <span>Curriculum</span>
-                  <span>3 levels</span>
+                  <span>The VALOUR Loop</span>
+                  <span>4 steps</span>
                 </div>
-                <h2>Foundation · Translation · Simulation</h2>
-                <p>Language first. Lenses second. Boardroom pressure third.</p>
+                <h2>Orient · Frame · Pressure-test · Refine</h2>
+                <p>Read the room. Translate your proposal. Defend it. Refine it.</p>
                 <div className="hero-panel-divider">
-                  <p className="hero-panel-live-label">Currently live</p>
-                  <p className="hero-panel-live-text">Level 100 — Executive Language Foundations</p>
+                  <p className="hero-panel-live-label">Field guide live now</p>
+                  <p className="hero-panel-live-text">Seven executive mindframes — free to read</p>
                 </div>
               </div>
             </div>
@@ -178,7 +182,7 @@ function App() {
                     </div>
                     {level.status === 'Live' && (
                       <a href="#foundation" className="level-cta">
-                        Begin Foundation ↓
+                        Read the field guide ↓
                       </a>
                     )}
                   </article>
@@ -188,41 +192,26 @@ function App() {
           </div>
         </section>
 
-        {/* ── Foundation modules ─────────────── */}
+        {/* ── Foundation mindframes ──────────── */}
         <section id="foundation" className="section-alt">
           <div className="container">
-            <p className="section-label">Foundation</p>
-            <h2>Seven modules.</h2>
+            <p className="section-label">Field Guide</p>
+            <h2>Seven mindframes.</h2>
             <p className="intro-text">
-              Open a module to read the key insight, boardroom sentence, vocabulary, and practice prompt.
+              Each mindframe maps how an executive thinks under pressure — what they protect, fear, and reward.
+              Open one to read the full briefing.
             </p>
-
-            {/* Progress strip */}
-            <div className="module-progress">
-              <div className="module-progress-bar">
-                <div className="module-progress-fill" style={{ width: `${(reviewedCount / totalModules) * 100}%` }} />
-              </div>
-              <span className={`module-progress-count${allReviewed ? ' is-complete' : ''}`}>
-                {allReviewed ? '✓ All modules reviewed' : `${reviewedCount} of ${totalModules} reviewed`}
-              </span>
-            </div>
-
             <div className="module-card-grid">
               {level100Modules.map((module) => {
                 const isExpanded = expandedModules.has(module.id)
-                const isReviewed = reviewedModules.has(module.id)
                 return (
-                  <article
-                    className={`module-card${isReviewed ? ' is-reviewed' : ''}`}
-                    key={module.id}
-                  >
+                  <article className="module-card" key={module.id}>
                     <div className="module-topline">
                       <span className="module-id">{module.id}</span>
                       <span className="badge badge-seed">{module.lens}</span>
                     </div>
                     <h3>{module.title}</h3>
                     <p className="module-outcome">{module.outcome}</p>
-
                     {isExpanded && (
                       <>
                         <div className="module-section">
@@ -251,72 +240,37 @@ function App() {
                           <p className="mini-label">Practice prompt</p>
                           <p>{module.drill}</p>
                         </div>
-                        {module.sourceUrl ? (
-                          <a className="module-link" href={module.sourceUrl} target="_blank" rel="noreferrer">
-                            Open learning anchor →
-                          </a>
-                        ) : (
-                          <span className="module-link muted-link">Learning anchor in curation</span>
-                        )}
                       </>
                     )}
-
-                    <div className="module-card-actions">
-                      <button
-                        className={`module-card-btn${isReviewed ? ' is-reviewed' : ''}`}
-                        onClick={() => toggleReviewed(module.id)}
-                      >
-                        {isReviewed ? '✓ Reviewed' : 'Mark reviewed'}
-                      </button>
-                      <button
-                        className="module-card-btn btn-open"
-                        onClick={() => toggleModule(module.id)}
-                      >
-                        {isExpanded ? 'Collapse ↑' : 'Open →'}
-                      </button>
-                    </div>
+                    <button
+                      className="module-card-btn btn-open"
+                      onClick={() => toggleModule(module.id)}
+                    >
+                      {isExpanded ? 'Collapse ↑' : 'Open →'}
+                    </button>
                   </article>
                 )
               })}
             </div>
-
-            {/* Completion bridge to VALOUR */}
-            {allReviewed && (
-              <div className="completion-cta">
-                <div className="completion-cta-text">
-                  <p className="completion-cta-title">Foundation complete. Take your language into the boardroom.</p>
-                  <span className="completion-cta-sub">Open VALOUR™ to rehearse a live proposal with AI executives.</span>
-                </div>
-                <a href="https://www.ordoanimi.com" className="btn-primary" target="_blank" rel="noreferrer">
-                  Open VALOUR™ →
-                </a>
-              </div>
-            )}
           </div>
         </section>
 
-        {/* ── Method ────────────────────────── */}
+        {/* ── Method / VALOUR Loop ──────────── */}
         <section id="method">
-          <div className="container split-layout">
-            <div>
-              <p className="section-label">Method</p>
-              <h2>Watch. Translate. Apply.</h2>
-              <p className="intro-text">
-                Video anchors the concept. Notes build the vocabulary. Scenarios test the language.
-              </p>
-            </div>
-            <div className="learning-steps">
-              {[
-                'Watch',
-                'Read beside it',
-                'Capture rough notes',
-                'Distil into executive language',
-                'Build your boardroom sentence',
-                'Apply in a live scenario',
-              ].map((step, index) => (
-                <div className="teach-item" key={step}>
-                  <span className="step-number">0{index + 1}</span>
-                  <strong>{step}</strong>
+          <div className="container">
+            <p className="section-label">Method</p>
+            <h2>The VALOUR Loop.</h2>
+            <p className="intro-text">
+              Four steps from cold preparation to boardroom confidence.
+            </p>
+            <div className="loop-steps">
+              {VALOUR_LOOP.map((step) => (
+                <div className="loop-step" key={step.n}>
+                  <span className="loop-step-n">{step.n}</span>
+                  <div className="loop-step-body">
+                    <strong className="loop-step-label">{step.label}</strong>
+                    <p className="loop-step-desc">{step.desc}</p>
+                  </div>
                 </div>
               ))}
             </div>
@@ -326,8 +280,8 @@ function App() {
         {/* ── Lenses ────────────────────────── */}
         <section id="lenses" className="section-alt">
           <div className="container">
-            <p className="section-label">Lenses</p>
-            <h2>Eight executives.</h2>
+            <p className="section-label">Executive Lenses</p>
+            <h2>Eight roles. Eight value systems.</h2>
             <p className="intro-text">
               Know what each role protects, fears, and rewards before you speak.
             </p>
@@ -376,58 +330,31 @@ function App() {
           </div>
         </section>
 
-        {/* ── Copilot ───────────────────────── */}
-        <section id="copilot" className="section-dark">
+        {/* ── How to Use VALOUR ─────────────── */}
+        <section id="valour" className="section-dark">
           <div className="container">
-            <p className="section-label">Copilot</p>
-            <h2>Three modes.</h2>
-            <p className="intro-text">Fast-track, deep study, or pressure test.</p>
+            <p className="section-label">How to Use VALOUR</p>
+            <h2>Three entry points.</h2>
+            <p className="intro-text">
+              Pick the one that matches where you are right now.
+            </p>
             <div className="lib-grid">
-              {copilotModes.map((mode) => (
-                <article className="book-card" key={mode.mode}>
-                  <p className="book-track">{mode.mode}</p>
-                  <h3>{mode.trigger}</h3>
-                  <p>{mode.purpose}</p>
-                  <div className="mode-output">
-                    {mode.output.map((item) => <span key={item}>{item}</span>)}
-                  </div>
+              {VALOUR_ENTRIES.map((entry) => (
+                <article className="book-card" key={entry.mode}>
+                  <p className="book-track">{entry.when}</p>
+                  <h3>{entry.mode}</h3>
+                  <p>{entry.desc}</p>
                   <a
                     href="https://www.ordoanimi.com"
                     className="mode-cta"
                     target="_blank"
                     rel="noreferrer"
                   >
-                    Open in VALOUR™ →
+                    {entry.cta}
                   </a>
                 </article>
               ))}
             </div>
-          </div>
-        </section>
-
-        {/* ── Resources ─────────────────────── */}
-        <section id="resources">
-          <div className="container">
-            <p className="section-label">Resources</p>
-            <h2>Six resource types.</h2>
-            <ul className="res-list">
-              {[
-                { icon: '▶', title: 'Video anchors', desc: 'Business school and practitioner content. One per module.' },
-                { icon: '≡', title: 'Transcript sidecars', desc: 'Full transcripts beside every video. Annotate and build vocabulary.' },
-                { icon: '↓', title: 'PDF notes', desc: 'Key ideas, sentences, and vocabulary. Scan before any room.' },
-                { icon: '◎', title: 'Optional readings', desc: 'Two or three external references for operators who want to go deeper.' },
-                { icon: '✦', title: 'Cool notes', desc: 'The one insight that makes a module stick.' },
-                { icon: '→', title: 'Pathway references', desc: 'Pointers to programs where this language is already in use.' },
-              ].map((item) => (
-                <li key={item.title}>
-                  <span className="res-list-icon">{item.icon}</span>
-                  <div>
-                    <p className="res-list-title">{item.title}</p>
-                    <p className="res-list-desc">{item.desc}</p>
-                  </div>
-                </li>
-              ))}
-            </ul>
           </div>
         </section>
 
@@ -438,10 +365,10 @@ function App() {
               <p className="section-label">Boardroom Simulator</p>
               <h2>Bring a live proposal.</h2>
               <p className="intro-text">
-                Seven executives. Competing value systems. Real room pressure.
+                Eight executives. Competing value systems. Real room pressure.
               </p>
               <p style={{ marginTop: '1rem', fontSize: '15px', color: 'rgba(247,242,232,.48)' }}>
-                Complete Foundation first — then take your language into VALOUR™ and defend a real proposal.
+                Read the field guide first — then take your language into VALOUR™ and defend a real proposal.
               </p>
               <div style={{ marginTop: '2rem' }}>
                 <a href="https://www.ordoanimi.com" className="btn-primary" target="_blank" rel="noreferrer">
@@ -451,18 +378,15 @@ function App() {
             </div>
             <div className="dash-summary">
               <div className="dash-summary-score">
-                <div className="dash-summary-count">7</div>
+                <div className="dash-summary-count">8</div>
                 <div className="dash-summary-label">executive roles</div>
               </div>
               <div className="dash-summary-next">
                 <p className="dash-summary-text">
-                  CEO, CFO, CIO, COO, CMO, CISO/CRO, and Chair — each testing your proposal from a different value system.
+                  CEO, CFO, CIO, COO, CMO, CISO/CRO, Chair — each testing your proposal from a different value system.
                 </p>
-                <div className="dash-progress-bar dash-summary-bar">
-                  <div className="dash-progress-fill" style={{ width: `${(reviewedCount / totalModules) * 100}%` }} />
-                </div>
-                <p style={{ fontSize: '11px', color: 'rgba(247,242,232,.36)', marginTop: '0.5rem', letterSpacing: '.04em' }}>
-                  {reviewedCount} of {totalModules} modules reviewed
+                <p style={{ fontSize: '11px', color: 'rgba(247,242,232,.36)', marginTop: '0.75rem', letterSpacing: '.04em' }}>
+                  Read all seven mindframes before you enter.
                 </p>
               </div>
             </div>
@@ -479,13 +403,13 @@ function App() {
                 Executive Fast Track
                 <small>by Ordo Animi</small>
               </span>
-              <p className="footer-sub">C-suite fluency and boardroom command.</p>
+              <p className="footer-sub">Know the room before you enter it.</p>
               <div className="footer-links" style={{ marginTop: '1.25rem' }}>
                 <a href="#curriculum">Curriculum</a>
-                <a href="#foundation">Foundation</a>
-                <a href="#method">Method</a>
+                <a href="#foundation">Field Guide</a>
+                <a href="#method">The Loop</a>
                 <a href="#lenses">Lenses</a>
-                <a href="#copilot">Copilot</a>
+                <a href="#valour">How to Use VALOUR</a>
                 <a href="#simulator">Simulator</a>
               </div>
             </div>

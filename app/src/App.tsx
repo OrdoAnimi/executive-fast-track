@@ -363,14 +363,14 @@ function App() {
         </section>
 
         {/* ── How to Use VALOUR ─────────────── */}
-        <section id="valour" className="section-dark">
+        <section id="valour">
           <div className="container">
             <p className="section-label">How to Use VALOUR</p>
             <h2>Three entry points.</h2>
             <p className="intro-text">
               Pick the one that matches where you are right now.
             </p>
-            <div className="lib-grid">
+            <div className="lib-grid lib-grid-light">
               {VALOUR_ENTRIES.map((entry) => (
                 <article className="book-card" key={entry.mode}>
                   <p className="book-track">{entry.when}</p>

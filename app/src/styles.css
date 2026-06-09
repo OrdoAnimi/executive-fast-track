@@ -1299,6 +1299,22 @@ footer {
 
 .mode-cta:hover { color: var(--gold-soft); }
 
+/* ── Book card on light background ──────────── */
+.lib-grid-light { border-color: var(--rule-strong); }
+.lib-grid-light .book-card {
+  border-color: var(--rule-strong);
+  background: var(--paper);
+}
+.lib-grid-light .book-card:hover { background: var(--paper-2); }
+.lib-grid-light .book-track { color: var(--label); }
+.lib-grid-light .book-card h3 { color: var(--ink); }
+.lib-grid-light .book-card p { color: var(--muted); }
+.lib-grid-light .mode-cta {
+  color: var(--gold);
+  border-top-color: var(--rule);
+}
+.lib-grid-light .mode-cta:hover { color: #9f742f; }
+
 /* ── Curriculum level CTA ────────────────────── */
 .level-cta {
   display: inline-flex;

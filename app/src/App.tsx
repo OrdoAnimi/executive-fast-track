@@ -1,5 +1,7 @@
 import { copilotModes, courseLevels, executiveLenses, level100Modules } from './data'
 
+const TRACK_NAMES = ['Foundation', 'Translation', 'Simulation']
+
 function App() {
   return (
     <>
@@ -25,27 +27,21 @@ function App() {
           <div className="container hero-layout">
             <div>
               <div className="hero-bar" />
-              <p className="section-label hero-label">Velocity Architecture</p>
-              <h1>Walk into any executive room. Change the outcome.</h1>
-              <p className="hero-sub">
-                Built for senior operators who can solve hard problems — and need to own the room where the decisions land.
-              </p>
+              <p className="section-label">Velocity Architecture</p>
+              <h1>C-suite fluency.<br />Boardroom command.</h1>
               <p className="hero-copy">
-                Seven foundation modules. Eight executive lenses. A boardroom simulator that puts your live proposal under real room pressure.
+                Seven modules, eight lenses, one boardroom simulator.
               </p>
               <div className="btn-group">
-                <a href="#foundation" className="btn-primary">Open Curriculum</a>
-                <a href="#simulator" className="btn-outline">Explore Simulator</a>
+                <a href="#foundation" className="btn-primary">Begin</a>
+                <a href="#simulator" className="btn-outline">Open Simulator</a>
               </div>
             </div>
             <div className="hero-panel" aria-label="Curriculum structure">
               <p className="panel-kicker">Foundation · Translation · Simulation</p>
-              <h2>Three levels in sequence.</h2>
+              <h2>Three levels.</h2>
               <div className="panel-rule" />
-              <p>
-                Start with the language. Rotate it through every executive lens.
-                Then defend a live proposal under boardroom pressure.
-              </p>
+              <p>Language first. Lenses second. Boardroom pressure third.</p>
             </div>
           </div>
         </section>
@@ -54,38 +50,48 @@ function App() {
         <section id="curriculum">
           <div className="container">
             <p className="section-label">Curriculum</p>
-            <h2>Foundation, translation, simulation.</h2>
-            <p className="intro-text">
-              Three levels in sequence. Each builds on the last. Most operators enter at Foundation and are surprised how much shifts.
-            </p>
+            <h2>Three levels in sequence.</h2>
+            <p className="intro-text">Foundation is live. Translation and Simulation follow.</p>
+            <div className="track-row">
+              {courseLevels.map((level, i) => {
+                const tc = level.status === 'Live' ? 'track-active' : level.status === 'Planned' ? 'track-future' : 'track-coming'
+                return (
+                  <div className={`track-stage ${tc}`} key={level.level}>
+                    <div className="track-stage-name">{TRACK_NAMES[i]}</div>
+                    <div className="track-stage-level">{level.level}</div>
+                    <span className="track-stage-status">{level.status}</span>
+                  </div>
+                )
+              })}
+            </div>
             <div className="level-grid">
-              {courseLevels.map((level, index) => (
-                <article
-                  className={`dash-course${level.status === 'Live' ? ' state-inprogress' : ''}`}
-                  key={level.level}
-                >
-                  <div className="dash-course-header">
-                    <div className="dash-course-header-left">
-                      <div className="dash-course-n">{String(index + 1).padStart(2, '0')}</div>
-                      <div>
-                        <p className="level-eyebrow">{level.level}</p>
-                        <h3 className="dash-course-title">{level.title}</h3>
-                        <p className="dash-course-meta">{level.purpose}</p>
+              {courseLevels.map((level, index) => {
+                const lc = level.status === 'Live' ? 'level-live' : level.status === 'Planned' ? 'level-planned' : 'level-coming'
+                return (
+                  <article className={`dash-course ${lc}`} key={level.level}>
+                    <div className="dash-course-header">
+                      <div className="dash-course-header-left">
+                        <div className="dash-course-n">{String(index + 1).padStart(2, '0')}</div>
+                        <div>
+                          <p className="level-eyebrow">{level.level}</p>
+                          <h3 className="dash-course-title">{level.title}</h3>
+                          <p className="dash-course-meta">{level.purpose}</p>
+                        </div>
                       </div>
+                      <span className={`badge ${level.status === 'Live' ? 'badge-seed' : 'badge-planned'}`}>
+                        {level.status}
+                      </span>
                     </div>
-                    <span className={`badge ${level.status === 'Live' ? 'badge-seed' : 'badge-planned'}`}>
-                      {level.status}
-                    </span>
-                  </div>
-                  <ul className="module-list">
-                    {level.modules.map((mod) => <li key={mod}>{mod}</li>)}
-                  </ul>
-                  <div className="dash-cert">
-                    <p className="dash-cert-label">You leave with</p>
-                    <strong>{level.outcome}</strong>
-                  </div>
-                </article>
-              ))}
+                    <ul className="module-list">
+                      {level.modules.map((mod) => <li key={mod}>{mod}</li>)}
+                    </ul>
+                    <div className="dash-cert">
+                      <p className="dash-cert-label">You leave with</p>
+                      <strong>{level.outcome}</strong>
+                    </div>
+                  </article>
+                )
+              })}
             </div>
           </div>
         </section>
@@ -94,10 +100,8 @@ function App() {
         <section id="foundation" className="section-alt">
           <div className="container">
             <p className="section-label">Foundation</p>
-            <h2>Seven modules. Seven shifts in how you speak.</h2>
-            <p className="intro-text">
-              Each module delivers a boardroom sentence that works, vocabulary to deploy immediately, and a practice prompt to test your language under pressure.
-            </p>
+            <h2>Seven modules.</h2>
+            <p className="intro-text">Each module builds one executive skill.</p>
             <div className="module-card-grid">
               {level100Modules.map((module) => (
                 <article className="module-card" key={module.id}>
@@ -151,9 +155,9 @@ function App() {
           <div className="container split-layout">
             <div>
               <p className="section-label">Method</p>
-              <h2>Watch it. Translate it. Say it.</h2>
+              <h2>Watch. Translate. Apply.</h2>
               <p className="intro-text">
-                The Multimodal Immersion Loop keeps you moving without school-mode friction. Video anchors the concept. Notes build the vocabulary. Scenario application tests whether the language holds under pressure.
+                Video anchors the concept. Notes build the vocabulary. Scenarios test the language.
               </p>
             </div>
             <div className="learning-steps">
@@ -177,10 +181,10 @@ function App() {
         {/* ── Lenses ───────────────────────────────────────── */}
         <section id="lenses" className="section-alt">
           <div className="container">
-            <p className="section-label">Executive lenses</p>
-            <h2>Read the room before you open your mouth.</h2>
+            <p className="section-label">Lenses</p>
+            <h2>Eight executives.</h2>
             <p className="intro-text">
-              Know what each person protects, fears, and rewards before you speak. The language that lands with the CEO loses with the CFO. Knowing the difference changes what you say first.
+              Know what each role protects, fears, and rewards before you speak.
             </p>
             <div className="cards-grid lens-grid">
               {executiveLenses.map((lens) => (
@@ -210,11 +214,9 @@ function App() {
         {/* ── Copilot ──────────────────────────────────────── */}
         <section id="copilot" className="section-dark">
           <div className="container">
-            <p className="section-label">Executive Copilot</p>
-            <h2>Practice in the room before you're in the room.</h2>
-            <p className="intro-text">
-              Three modes, depending on where you are — moving fast, deep in a study block, or ready to be pressure-tested. The Copilot meets you there.
-            </p>
+            <p className="section-label">Copilot</p>
+            <h2>Three modes.</h2>
+            <p className="intro-text">Fast-track, deep study, or pressure test.</p>
             <div className="lib-grid">
               {copilotModes.map((mode) => (
                 <article className="book-card" key={mode.mode}>
@@ -234,50 +236,25 @@ function App() {
         <section id="resources">
           <div className="container">
             <p className="section-label">Resources</p>
-            <h2>Everything the module needs. Nothing it doesn't.</h2>
-            <p className="intro-text">
-              Each module is anchored to real material. Six resource types keep the learning moving without adding overhead.
-            </p>
-            <div className="res-grid">
+            <h2>Six resource types.</h2>
+            <ul className="res-list">
               {[
-                {
-                  icon: '▶',
-                  title: 'Video anchors',
-                  desc: 'High-signal videos from global business schools and practitioner content. Each one anchors a module to executive thinking in practice.',
-                },
-                {
-                  icon: '≡',
-                  title: 'Transcript sidecars',
-                  desc: 'Full transcripts sit beside every video. Annotate, underline, and build your executive vocabulary in context.',
-                },
-                {
-                  icon: '↓',
-                  title: 'PDF notes',
-                  desc: 'Module-level PDFs distil key ideas, boardroom sentences, and vocabulary into a format you can scan before any room.',
-                },
-                {
-                  icon: '◎',
-                  title: 'Optional readings',
-                  desc: 'Two or three curated external references for operators who want to go deeper without following a syllabus.',
-                },
-                {
-                  icon: '✦',
-                  title: 'Cool notes',
-                  desc: 'The one insight that makes a module stick — the framing shift that changes how you walk into a room.',
-                },
-                {
-                  icon: '→',
-                  title: 'Pathway references',
-                  desc: 'Curated pointers to external programs and communities where this language is already in use.',
-                },
+                { icon: '▶', title: 'Video anchors', desc: 'Business school and practitioner content. One per module.' },
+                { icon: '≡', title: 'Transcript sidecars', desc: 'Full transcripts beside every video. Annotate and build vocabulary.' },
+                { icon: '↓', title: 'PDF notes', desc: 'Key ideas, sentences, and vocabulary. Scan before any room.' },
+                { icon: '◎', title: 'Optional readings', desc: 'Two or three external references for operators who want to go deeper.' },
+                { icon: '✦', title: 'Cool notes', desc: 'The one insight that makes a module stick.' },
+                { icon: '→', title: 'Pathway references', desc: 'Pointers to programs where this language is already in use.' },
               ].map((item) => (
-                <div className="res-card" key={item.title}>
-                  <div className="res-icon">{item.icon}</div>
-                  <h3>{item.title}</h3>
-                  <p>{item.desc}</p>
-                </div>
+                <li key={item.title}>
+                  <span className="res-list-icon">{item.icon}</span>
+                  <div>
+                    <p className="res-list-title">{item.title}</p>
+                    <p className="res-list-desc">{item.desc}</p>
+                  </div>
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
         </section>
 
@@ -286,9 +263,9 @@ function App() {
           <div className="container simulator-panel">
             <div>
               <p className="section-label">Boardroom Simulator</p>
-              <h2>Put your real proposal under room pressure.</h2>
+              <h2>Bring a live proposal.</h2>
               <p className="intro-text">
-                Bring a live proposal, transformation, or recommendation. Seven executives test it from competing value systems simultaneously. You leave with a boardroom-ready brief, an objection map, and a decision memo.
+                Seven executives. Competing value systems. Real room pressure.
               </p>
             </div>
             <div className="dash-summary simulator-summary">
@@ -313,7 +290,7 @@ function App() {
       <footer>
         <div className="footer-inner">
           <p className="footer-brand">Executive Fast Track</p>
-          <p className="footer-sub">C-suite fluency and boardroom command. A Velocity Architecture program.</p>
+          <p className="footer-sub">A Velocity Architecture program.</p>
           <div className="footer-links">
             <a href="#curriculum">Curriculum</a>
             <a href="#foundation">Foundation</a>
@@ -322,9 +299,7 @@ function App() {
             <a href="#copilot">Copilot</a>
             <a href="#simulator">Simulator</a>
           </div>
-          <p className="footer-bottom">
-            © 2026 Velocity Architecture. Executive Fast Track is a Velocity Architecture program for C-suite fluency, executive translation, and boardroom engagement.
-          </p>
+          <p className="footer-bottom">© 2026 Velocity Architecture.</p>
         </div>
       </footer>
     </>

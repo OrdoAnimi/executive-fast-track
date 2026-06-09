@@ -25,7 +25,7 @@ const VALOUR_ENTRIES = [
     content: 'full-prep',
   },
   {
-    mode: 'Live rehearsal',
+    mode: 'Live session',
     when: 'Any time',
     desc: 'Bring a real proposal. Eight executives will test it. Pressure reveals what polish hides.',
     content: 'live-rehearsal',
@@ -209,7 +209,7 @@ function App() {
               <div className="hero-proof">
                 <span>Field guide — free</span>
                 <span>Eight executive lenses</span>
-                <span>VALOUR rehearsal</span>
+                <span>VALOUR live session</span>
               </div>
             </div>
             <div className="hero-panel">

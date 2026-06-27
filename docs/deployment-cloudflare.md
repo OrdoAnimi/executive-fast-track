@@ -17,7 +17,7 @@ executive-fast-track
 Repository:
 
 ```text
-ZenCloudAU/executive-fast-track
+OrdoAnimi/executive-fast-track
 ```
 
 Production branch:
@@ -79,7 +79,7 @@ app/dist
 3. Create application.
 4. Choose Pages.
 5. Import from an existing Git repository.
-6. Select `ZenCloudAU/executive-fast-track`.
+6. Select `OrdoAnimi/executive-fast-track`.
 7. Configure the build settings above.
 8. Save and deploy.
 

@@ -121,17 +121,17 @@ function App() {
 
   return (
     <>
-      {/* ── Ecosystem strip ───────────────── */}
+      {/* ââ Ecosystem strip âââââââââââââââââ */}
       <div className="eco-strip">
-        <span className="eco-strip-label">ZenCloud ecosystem</span>
+        <span className="eco-strip-label">The OrdoAnimi Group ecosystem</span>
         <div className="eco-links">
-          <a href={valourUrl('eco-strip')} target="_blank" rel="noreferrer">VALOUR™</a>
-          <a href="https://velocityarchitectureframework.com" target="_blank" rel="noreferrer">Velocity™</a>
-          <a href="https://www.zencloud.com.au" target="_blank" rel="noreferrer">ZenCloud™</a>
+          <a href={valourUrl('eco-strip')} target="_blank" rel="noreferrer">VALOURâ¢</a>
+          <a href="https://velocityarchitectureframework.com" target="_blank" rel="noreferrer">Velocityâ¢</a>
+          <a href="https://www.zencloud.com.au" target="_blank" rel="noreferrer">The OrdoAnimi Groupâ¢</a>
         </div>
       </div>
 
-      {/* ── Navigation ────────────────────── */}
+      {/* ââ Navigation ââââââââââââââââââââââ */}
       <nav aria-label="Main navigation">
         <div className="nav-inner">
           <a href="#home" className="nav-brand">
@@ -148,7 +148,7 @@ function App() {
             ))}
           </ul>
           <a href={valourUrl('nav-cta')} className="nav-cta" target="_blank" rel="noreferrer">
-            Open VALOUR™
+            Open VALOURâ¢
           </a>
           <button
             className={`hamburger${mobileNavOpen ? ' is-open' : ''}`}
@@ -184,14 +184,14 @@ function App() {
             target="_blank"
             rel="noreferrer"
           >
-            Open VALOUR™ →
+            Open VALOURâ¢ â
           </a>
         </div>
       </nav>
 
       <main>
 
-        {/* ── Hero ──────────────────────────── */}
+        {/* ââ Hero ââââââââââââââââââââââââââââ */}
         <section id="home" className="hero">
           <div className="hero-layout">
             <div className="hero-copy">
@@ -202,12 +202,12 @@ function App() {
               </p>
               <div className="btn-group">
                 <a href={valourUrl('hero-cta')} className="btn-primary" target="_blank" rel="noreferrer">
-                  Open VALOUR™ →
+                  Open VALOURâ¢ â
                 </a>
                 <a href="#foundation" className="btn-outline">Read the field guide</a>
               </div>
               <div className="hero-proof">
-                <span>Field guide — free</span>
+                <span>Field guide â free</span>
                 <span>Eight executive lenses</span>
                 <span>VALOUR live session</span>
               </div>
@@ -218,18 +218,18 @@ function App() {
                   <span>The VALOUR Loop</span>
                   <span>4 steps</span>
                 </div>
-                <p className="hero-panel-loop">Orient · Frame · Pressure-test · Refine</p>
+                <p className="hero-panel-loop">Orient Â· Frame Â· Pressure-test Â· Refine</p>
                 <p>Read the room. Translate your proposal. Defend it. Refine it.</p>
                 <div className="hero-panel-divider">
                   <p className="hero-panel-live-label">Field guide live now</p>
-                  <p className="hero-panel-live-text">Seven executive mindframes — free to read</p>
+                  <p className="hero-panel-live-text">Seven executive mindframes â free to read</p>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* ── Curriculum ────────────────────── */}
+        {/* ââ Curriculum ââââââââââââââââââââââ */}
         <section id="curriculum">
           <div className="container">
             <p className="section-label">Curriculum</p>
@@ -273,7 +273,7 @@ function App() {
                       <strong>{level.outcome}</strong>
                     </div>
                     {level.status === 'Live' && (
-                      <a href="#foundation" className="level-cta">Read the field guide ↓</a>
+                      <a href="#foundation" className="level-cta">Read the field guide â</a>
                     )}
                   </article>
                 )
@@ -282,13 +282,13 @@ function App() {
           </div>
         </section>
 
-        {/* ── Field Guide ───────────────────── */}
+        {/* ââ Field Guide âââââââââââââââââââââ */}
         <section id="foundation" className="section-alt">
           <div className="container">
             <p className="section-label">Field Guide</p>
             <h2>Seven mindframes.</h2>
             <p className="intro-text">
-              Each entry maps how an executive thinks under pressure — what they protect, fear, and reward.
+              Each entry maps how an executive thinks under pressure â what they protect, fear, and reward.
               Open one to read the full briefing.
             </p>
             <div className="module-card-grid">
@@ -328,7 +328,7 @@ function App() {
                       onClick={() => toggleModule(module.id)}
                       aria-expanded={isExpanded}
                     >
-                      {isExpanded ? 'Collapse ↑' : 'Open →'}
+                      {isExpanded ? 'Collapse â' : 'Open â'}
                     </button>
                   </article>
                 )
@@ -337,7 +337,7 @@ function App() {
           </div>
         </section>
 
-        {/* ── VALOUR Loop ───────────────────── */}
+        {/* ââ VALOUR Loop âââââââââââââââââââââ */}
         <section id="method">
           <div className="container">
             <p className="section-label">Method</p>
@@ -359,13 +359,13 @@ function App() {
           </div>
         </section>
 
-        {/* ── Executive Clusters ────────────── */}
+        {/* ââ Executive Clusters ââââââââââââââ */}
         <section id="lenses" className="section-alt">
           <div className="container">
             <p className="section-label">Executive Lenses</p>
             <h2>Four clusters. Eight roles.</h2>
             <p className="intro-text">
-              Executives share value systems within clusters. Know the cluster first — then the role.
+              Executives share value systems within clusters. Know the cluster first â then the role.
             </p>
             <div className="cluster-grid">
               {CLUSTERS.map((cluster) => {
@@ -422,7 +422,7 @@ function App() {
                       onClick={() => toggleCluster(cluster.name)}
                       aria-expanded={isExpanded}
                     >
-                      {isExpanded ? 'Close cluster ↑' : `Open ${cluster.roles.length > 1 ? cluster.roles.length + ' roles' : 'lens'} →`}
+                      {isExpanded ? 'Close cluster â' : `Open ${cluster.roles.length > 1 ? cluster.roles.length + ' roles' : 'lens'} â`}
                     </button>
                   </article>
                 )
@@ -431,7 +431,7 @@ function App() {
           </div>
         </section>
 
-        {/* ── How to Use VALOUR ─────────────── */}
+        {/* ââ How to Use VALOUR âââââââââââââââ */}
         <section id="valour">
           <div className="container">
             <p className="section-label">How to Use VALOUR</p>
@@ -451,7 +451,7 @@ function App() {
                     target="_blank"
                     rel="noreferrer"
                   >
-                    Open VALOUR™ →
+                    Open VALOURâ¢ â
                   </a>
                 </article>
               ))}
@@ -459,7 +459,7 @@ function App() {
           </div>
         </section>
 
-        {/* ── Simulator ─────────────────────── */}
+        {/* ââ Simulator âââââââââââââââââââââââ */}
         <section id="simulator" className="section-dark">
           <div className="container simulator-panel">
             <div>
@@ -469,11 +469,11 @@ function App() {
                 Eight executives. Competing value systems. Real room pressure.
               </p>
               <p style={{ marginTop: '1rem', fontSize: '15px', color: 'rgba(247,242,232,.48)' }}>
-                Read the field guide first — then take your language into VALOUR™ and defend a real proposal.
+                Read the field guide first â then take your language into VALOURâ¢ and defend a real proposal.
               </p>
               <div style={{ marginTop: '2rem' }}>
                 <a href={valourUrl('simulator-cta')} className="btn-primary" target="_blank" rel="noreferrer">
-                  Open VALOUR™ →
+                  Open VALOURâ¢ â
                 </a>
               </div>
             </div>
@@ -484,7 +484,7 @@ function App() {
               </div>
               <div className="dash-summary-next">
                 <p className="dash-summary-text">
-                  CEO, CFO, CIO, COO, CMO, CISO, CRO, and Chair — each testing your proposal from a different value system.
+                  CEO, CFO, CIO, COO, CMO, CISO, CRO, and Chair â each testing your proposal from a different value system.
                 </p>
                 <p style={{ fontSize: '11px', color: 'rgba(247,242,232,.36)', marginTop: '0.75rem', letterSpacing: '.04em' }}>
                   Read all seven mindframes before you enter.
@@ -524,11 +524,11 @@ function App() {
             <div className="footer-cta-block">
               <p className="footer-cta-label">Ready to rehearse?</p>
               <a href={valourUrl('footer-cta')} className="footer-cta" target="_blank" rel="noreferrer">
-                Open VALOUR™
+                Open VALOURâ¢
               </a>
             </div>
           </div>
-          <p className="footer-bottom">© 2026 Ordo Animi · ZenCloud Global Consultants</p>
+          <p className="footer-bottom">Â© 2026 Ordo Animi Â· The OrdoAnimi Group</p>
         </div>
       </footer>
     </>

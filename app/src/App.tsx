@@ -7,7 +7,7 @@ const NAV_SECTIONS = ['curriculum', 'foundation', 'method', 'lenses', 'valour', 
 const VALOUR_LOOP = [
   { n: '01', label: 'Orient', desc: 'Read the room. Know who\'s in it and what they protect.' },
   { n: '02', label: 'Frame', desc: 'Translate your proposal into their language before you speak.' },
-  { n: '03', label: 'Pressure-test', desc: 'Enter VALOUR and defend it against all eight executives.' },
+  { n: '03', label: 'Pressure-test', desc: 'Enter Valour and defend it against all eight executives.' },
   { n: '04', label: 'Refine', desc: 'Take the resistance back to the field guide. Adjust. Re-enter.' },
 ]
 
@@ -74,7 +74,7 @@ function valourUrl(campaign: string, content?: string): string {
 }
 
 function navLabel(s: string): string {
-  if (s === 'valour') return 'Use VALOUR'
+  if (s === 'valour') return 'Use Valour'
   if (s === 'foundation') return 'Field Guide'
   return s.charAt(0).toUpperCase() + s.slice(1)
 }
@@ -139,7 +139,7 @@ function App() {
             ))}
           </ul>
           <a href={valourUrl('nav-cta')} className="nav-cta" target="_blank" rel="noreferrer">
-            Open VALOURÃ¢ÂÂ¢
+            Open ValourÃ¢ÂÂ¢
           </a>
           <button
             className={`hamburger${mobileNavOpen ? ' is-open' : ''}`}
@@ -175,7 +175,7 @@ function App() {
             target="_blank"
             rel="noreferrer"
           >
-            Open VALOURÃ¢ÂÂ¢ Ã¢ÂÂ
+            Open ValourÃ¢ÂÂ¢ Ã¢ÂÂ
           </a>
         </div>
       </nav>
@@ -193,20 +193,20 @@ function App() {
               </p>
               <div className="btn-group">
                 <a href={valourUrl('hero-cta')} className="btn-primary" target="_blank" rel="noreferrer">
-                  Open VALOURÃ¢ÂÂ¢ Ã¢ÂÂ
+                  Open ValourÃ¢ÂÂ¢ Ã¢ÂÂ
                 </a>
                 <a href="#foundation" className="btn-outline">Read the field guide</a>
               </div>
               <div className="hero-proof">
                 <span>Field guide Ã¢ÂÂ free</span>
                 <span>Eight executive lenses</span>
-                <span>VALOUR live session</span>
+                <span>Valour live session</span>
               </div>
             </div>
             <div className="hero-panel">
               <div className="hero-panel-card">
                 <div className="hero-panel-kicker">
-                  <span>The VALOUR Loop</span>
+                  <span>The Valour Loop</span>
                   <span>4 steps</span>
                 </div>
                 <p className="hero-panel-loop">Orient ÃÂ· Frame ÃÂ· Pressure-test ÃÂ· Refine</p>
@@ -328,11 +328,11 @@ function App() {
           </div>
         </section>
 
-        {/* Ã¢ÂÂÃ¢ÂÂ VALOUR Loop Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ */}
+        {/* Ã¢ÂÂÃ¢ÂÂ Valour Loop Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ */}
         <section id="method">
           <div className="container">
             <p className="section-label">Method</p>
-            <h2>The VALOUR Loop.</h2>
+            <h2>The Valour Loop.</h2>
             <p className="intro-text">
               Four steps from cold preparation to boardroom confidence.
             </p>
@@ -422,10 +422,10 @@ function App() {
           </div>
         </section>
 
-        {/* Ã¢ÂÂÃ¢ÂÂ How to Use VALOUR Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ */}
+        {/* Ã¢ÂÂÃ¢ÂÂ How to Use Valour Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ */}
         <section id="valour">
           <div className="container">
-            <p className="section-label">How to Use VALOUR</p>
+            <p className="section-label">How to Use Valour</p>
             <h2>Three entry points.</h2>
             <p className="intro-text">
               Pick the one that matches where you are right now.
@@ -442,7 +442,7 @@ function App() {
                     target="_blank"
                     rel="noreferrer"
                   >
-                    Open VALOURÃ¢ÂÂ¢ Ã¢ÂÂ
+                    Open ValourÃ¢ÂÂ¢ Ã¢ÂÂ
                   </a>
                 </article>
               ))}
@@ -460,11 +460,11 @@ function App() {
                 Eight executives. Competing value systems. Real room pressure.
               </p>
               <p style={{ marginTop: '1rem', fontSize: '15px', color: 'rgba(247,242,232,.48)' }}>
-                Read the field guide first Ã¢ÂÂ then take your language into VALOURÃ¢ÂÂ¢ and defend a real proposal.
+                Read the field guide first Ã¢ÂÂ then take your language into ValourÃ¢ÂÂ¢ and defend a real proposal.
               </p>
               <div style={{ marginTop: '2rem' }}>
                 <a href={valourUrl('simulator-cta')} className="btn-primary" target="_blank" rel="noreferrer">
-                  Open VALOURÃ¢ÂÂ¢ Ã¢ÂÂ
+                  Open ValourÃ¢ÂÂ¢ Ã¢ÂÂ
                 </a>
               </div>
             </div>
@@ -504,7 +504,7 @@ function App() {
                 <a href="#foundation">Field Guide</a>
                 <a href="#method">The Loop</a>
                 <a href="#lenses">Lenses</a>
-                <a href="#valour">Use VALOUR</a>
+                <a href="#valour">Use Valour</a>
                 <a href="#simulator">Simulator</a>
               </div>
               <div className="footer-legal-links">
@@ -515,7 +515,7 @@ function App() {
             <div className="footer-cta-block">
               <p className="footer-cta-label">Ready to rehearse?</p>
               <a href={valourUrl('footer-cta')} className="footer-cta" target="_blank" rel="noreferrer">
-                Open VALOURÃ¢ÂÂ¢
+                Open ValourÃ¢ÂÂ¢
               </a>
             </div>
           </div>

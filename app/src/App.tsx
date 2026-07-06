@@ -122,7 +122,7 @@ function App() {
   return (
     <>
 
-      {/* Ã¢ÂÂÃ¢ÂÂ Navigation Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ */}
+      {/* -- Navigation ---------------------- */}
       <nav aria-label="Main navigation">
         <div className="nav-inner">
           <a href="#home" className="nav-brand">
@@ -139,7 +139,7 @@ function App() {
             ))}
           </ul>
           <a href={valourUrl('nav-cta')} className="nav-cta" target="_blank" rel="noreferrer">
-            Open ValourÃ¢ÂÂ¢
+            Open Valour&trade;
           </a>
           <button
             className={`hamburger${mobileNavOpen ? ' is-open' : ''}`}
@@ -175,14 +175,14 @@ function App() {
             target="_blank"
             rel="noreferrer"
           >
-            Open ValourÃ¢ÂÂ¢ Ã¢ÂÂ
+            Open Valour&trade; &rarr;
           </a>
         </div>
       </nav>
 
       <main>
 
-        {/* Ã¢ÂÂÃ¢ÂÂ Hero Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ */}
+        {/* -- Hero ---------------------------- */}
         <section id="home" className="hero">
           <div className="hero-layout">
             <div className="hero-copy">
@@ -193,12 +193,12 @@ function App() {
               </p>
               <div className="btn-group">
                 <a href={valourUrl('hero-cta')} className="btn-primary" target="_blank" rel="noreferrer">
-                  Open ValourÃ¢ÂÂ¢ Ã¢ÂÂ
+                  Open Valour&trade; &rarr;
                 </a>
                 <a href="#foundation" className="btn-outline">Read the field guide</a>
               </div>
               <div className="hero-proof">
-                <span>Field guide Ã¢ÂÂ free</span>
+                <span>Field guide &mdash; free</span>
                 <span>Eight executive lenses</span>
                 <span>Valour live session</span>
               </div>
@@ -209,18 +209,18 @@ function App() {
                   <span>The Valour Loop</span>
                   <span>4 steps</span>
                 </div>
-                <p className="hero-panel-loop">Orient ÃÂ· Frame ÃÂ· Pressure-test ÃÂ· Refine</p>
+                <p className="hero-panel-loop">Orient &middot; Frame &middot; Pressure-test &middot; Refine</p>
                 <p>Read the room. Translate your proposal. Defend it. Refine it.</p>
                 <div className="hero-panel-divider">
                   <p className="hero-panel-live-label">Field guide live now</p>
-                  <p className="hero-panel-live-text">Seven executive mindframes Ã¢ÂÂ free to read</p>
+                  <p className="hero-panel-live-text">Seven executive mindframes &mdash; free to read</p>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Ã¢ÂÂÃ¢ÂÂ Curriculum Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ */}
+        {/* -- Curriculum ---------------------- */}
         <section id="curriculum">
           <div className="container">
             <p className="section-label">Curriculum</p>
@@ -264,7 +264,7 @@ function App() {
                       <strong>{level.outcome}</strong>
                     </div>
                     {level.status === 'Live' && (
-                      <a href="#foundation" className="level-cta">Read the field guide Ã¢ÂÂ</a>
+                      <a href="#foundation" className="level-cta">Read the field guide &darr;</a>
                     )}
                   </article>
                 )
@@ -273,13 +273,13 @@ function App() {
           </div>
         </section>
 
-        {/* Ã¢ÂÂÃ¢ÂÂ Field Guide Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ */}
+        {/* -- Field Guide --------------------- */}
         <section id="foundation" className="section-alt">
           <div className="container">
             <p className="section-label">Field Guide</p>
             <h2>Seven mindframes.</h2>
             <p className="intro-text">
-              Each entry maps how an executive thinks under pressure Ã¢ÂÂ what they protect, fear, and reward.
+              Each entry maps how an executive thinks under pressure &mdash; what they protect, fear, and reward.
               Open one to read the full briefing.
             </p>
             <div className="module-card-grid">
@@ -319,7 +319,7 @@ function App() {
                       onClick={() => toggleModule(module.id)}
                       aria-expanded={isExpanded}
                     >
-                      {isExpanded ? 'Collapse Ã¢ÂÂ' : 'Open Ã¢ÂÂ'}
+                      {isExpanded ? 'Collapse \u2191' : 'Open \u2192'}
                     </button>
                   </article>
                 )
@@ -328,7 +328,7 @@ function App() {
           </div>
         </section>
 
-        {/* Ã¢ÂÂÃ¢ÂÂ Valour Loop Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ */}
+        {/* -- Valour Loop --------------------- */}
         <section id="method">
           <div className="container">
             <p className="section-label">Method</p>
@@ -350,13 +350,13 @@ function App() {
           </div>
         </section>
 
-        {/* Ã¢ÂÂÃ¢ÂÂ Executive Clusters Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ */}
+        {/* -- Executive Clusters -------------- */}
         <section id="lenses" className="section-alt">
           <div className="container">
             <p className="section-label">Executive Lenses</p>
             <h2>Four clusters. Eight roles.</h2>
             <p className="intro-text">
-              Executives share value systems within clusters. Know the cluster first Ã¢ÂÂ then the role.
+              Executives share value systems within clusters. Know the cluster first &mdash; then the role.
             </p>
             <div className="cluster-grid">
               {CLUSTERS.map((cluster) => {
@@ -413,7 +413,7 @@ function App() {
                       onClick={() => toggleCluster(cluster.name)}
                       aria-expanded={isExpanded}
                     >
-                      {isExpanded ? 'Close cluster Ã¢ÂÂ' : `Open ${cluster.roles.length > 1 ? cluster.roles.length + ' roles' : 'lens'} Ã¢ÂÂ`}
+                      {isExpanded ? 'Close cluster \u2191' : `Open ${cluster.roles.length > 1 ? cluster.roles.length + ' roles' : 'lens'} &rarr;`}
                     </button>
                   </article>
                 )
@@ -422,7 +422,7 @@ function App() {
           </div>
         </section>
 
-        {/* Ã¢ÂÂÃ¢ÂÂ How to Use Valour Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ */}
+        {/* -- How to Use Valour --------------- */}
         <section id="valour">
           <div className="container">
             <p className="section-label">How to Use Valour</p>
@@ -442,7 +442,7 @@ function App() {
                     target="_blank"
                     rel="noreferrer"
                   >
-                    Open ValourÃ¢ÂÂ¢ Ã¢ÂÂ
+                    Open Valour&trade; &rarr;
                   </a>
                 </article>
               ))}
@@ -450,7 +450,7 @@ function App() {
           </div>
         </section>
 
-        {/* Ã¢ÂÂÃ¢ÂÂ Simulator Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ */}
+        {/* -- Simulator ----------------------- */}
         <section id="simulator" className="section-dark">
           <div className="container simulator-panel">
             <div>
@@ -460,11 +460,11 @@ function App() {
                 Eight executives. Competing value systems. Real room pressure.
               </p>
               <p style={{ marginTop: '1rem', fontSize: '15px', color: 'rgba(247,242,232,.48)' }}>
-                Read the field guide first Ã¢ÂÂ then take your language into ValourÃ¢ÂÂ¢ and defend a real proposal.
+                Read the field guide first &mdash; then take your language into Valour&trade; and defend a real proposal.
               </p>
               <div style={{ marginTop: '2rem' }}>
                 <a href={valourUrl('simulator-cta')} className="btn-primary" target="_blank" rel="noreferrer">
-                  Open ValourÃ¢ÂÂ¢ Ã¢ÂÂ
+                  Open Valour&trade; &rarr;
                 </a>
               </div>
             </div>
@@ -475,7 +475,7 @@ function App() {
               </div>
               <div className="dash-summary-next">
                 <p className="dash-summary-text">
-                  CEO, CFO, CIO, COO, CMO, CISO, CRO, and Chair Ã¢ÂÂ each testing your proposal from a different value system.
+                  CEO, CFO, CIO, COO, CMO, CISO, CRO, and Chair &mdash; each testing your proposal from a different value system.
                 </p>
                 <p style={{ fontSize: '11px', color: 'rgba(247,242,232,.36)', marginTop: '0.75rem', letterSpacing: '.04em' }}>
                   Read all seven mindframes before you enter.
@@ -515,11 +515,11 @@ function App() {
             <div className="footer-cta-block">
               <p className="footer-cta-label">Ready to rehearse?</p>
               <a href={valourUrl('footer-cta')} className="footer-cta" target="_blank" rel="noreferrer">
-                Open ValourÃ¢ÂÂ¢
+                Open Valour&trade;
               </a>
             </div>
           </div>
-          <p className="footer-bottom">ÃÂ© 2026 Ordo Animi ÃÂ· The OrdoAnimi Group</p>
+          <p className="footer-bottom">&copy; 2026 Ordo Animi &middot; The OrdoAnimi Group</p>
         </div>
       </footer>
     </>

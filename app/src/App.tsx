@@ -23,7 +23,7 @@ function App() {
           <div className="container hero-layout">
             <div>
               <div className="hero-bar" />
-              <p className="section-label hero-label">Velocity Academy stream</p>
+              <p className="section-label hero-label">OrdoAnimi Academy stream</p>
               <h1>C-suite fluency and boardroom engagement for serious operators.</h1>
               <p className="hero-sub">Learn to enter any executive room, read the decision landscape, and translate complex work into business value.</p>
               <p className="hero-copy">Executive Fast Track is product-agnostic. It is not a proprietary framework course. It trains the engagement layer: CEO, CFO, CIO, COO, CMO, CISO, CRO, Chair, board, investor, procurement, and transformation sponsor language.</p>
@@ -182,7 +182,7 @@ function App() {
       <footer>
         <div className="footer-inner">
           <p className="footer-brand">Executive Fast Track</p>
-          <p className="footer-sub">A Velocity Academy stream for C-suite fluency, executive translation, and boardroom engagement.</p>
+          <p className="footer-sub">An OrdoAnimi Academy stream for C-suite fluency, executive translation, and boardroom engagement.</p>
           <div className="footer-links">
             <a href="#course">Course</a>
             <a href="#learning-model">Learning Model</a>
@@ -191,7 +191,7 @@ function App() {
             <a href="#resources">Resources</a>
             <a href="#simulator">Simulator</a>
           </div>
-          <p className="footer-bottom">Private build. Product-agnostic by design. Velocity Academy hosts the learning stream; the capability remains portable.</p>
+          <p className="footer-bottom">Private build. Product-agnostic by design. OrdoAnimi Academy hosts the learning stream; the capability remains portable.</p>
         </div>
       </footer>
     </>

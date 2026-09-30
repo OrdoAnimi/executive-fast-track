@@ -122,12 +122,17 @@ function App() {
   return (
     <>
 
+      <div className="oa-strip">
+        <a href="https://www.ordoanimi.com/">OrdoAnimi</a>
+        <span>Executive Fast Track</span>
+      </div>
+
       {/* -- Navigation ---------------------- */}
       <nav aria-label="Main navigation">
         <div className="nav-inner">
           <a href="#home" className="nav-brand">
             Executive Fast Track
-            <small>by Ordo Animi</small>
+            <small>by OrdoAnimi</small>
           </a>
           <ul className="nav-links" role="list">
             {NAV_SECTIONS.map(s => (
@@ -493,7 +498,7 @@ function App() {
             <div className="footer-brand-block">
               <span className="footer-brand">
                 Executive Fast Track
-                <small>by Ordo Animi</small>
+                <small>by OrdoAnimi</small>
               </span>
               <p className="footer-sub">Know the room before you enter it.</p>
               <p className="footer-sources">
@@ -519,7 +524,7 @@ function App() {
               </a>
             </div>
           </div>
-          <p className="footer-bottom">&copy; 2026 Ordo Animi &middot; The OrdoAnimi Group</p>
+          <p className="footer-bottom">&copy; 2026 The OrdoAnimi Group</p>
         </div>
       </footer>
     </>

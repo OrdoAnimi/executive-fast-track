@@ -1,26 +1,26 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --paper:         #faf7ef;
-  --paper-2:       #f2ede0;
-  --paper-3:       #ebe4d2;
-  --ink:           #0b0e11;
-  --ink-soft:      #3d4536;
-  --graphite:      #07090b;
+  --paper:         var(--oa-card);
+  --paper-2:       var(--oa-page);
+  --paper-3:       var(--oa-sunken);
+  --ink:           var(--oa-ink);
+  --ink-soft:      var(--oa-body);
+  --graphite:      var(--oa-ink);
   --graphite-2:    #20272b;
   --muted:         #6e7460;
   --muted-2:       #8c8f88;
   --rule:          rgba(11,14,17,.13);
   --rule-strong:   rgba(11,14,17,.2);
-  --gold:          #b8924e;
-  --gold-soft:     #d4b36a;
+  --gold:          var(--oa-gold);
+  --gold-soft:     var(--oa-gold-light);
   --gold-subtle:   rgba(184,146,78,.11);
   --gold-border:   rgba(184,146,78,.26);
   --label:         #96753a;
   --font:          'DM Sans', -apple-system, system-ui, sans-serif;
   --font-heading:  'Playfair Display', Georgia, serif;
   --font-mono:     'DM Mono', ui-monospace, monospace;
-  --radius:        3px;
+  --radius:        var(--oa-radius);
   --transition:    160ms ease;
 }
 
@@ -31,7 +31,7 @@ html {
 
 body {
   font-family: var(--font);
-  background: var(--paper);
+  background: var(--oa-page);
   color: var(--ink);
   line-height: 1.65;
 }

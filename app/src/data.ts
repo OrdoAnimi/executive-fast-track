@@ -122,10 +122,10 @@ export const level100Modules: Level100Module[] = [
       'Strategy fails when the organisation cannot convert intent into coordinated execution. The useful question is where value leaks between decision, ownership, funding, and delivery.',
     boardroomSentence:
       'You do not have a strategy problem yet; you have a strategy-to-execution conversion problem.',
-    termsToSteal: ['value leakage', 'decision velocity', 'operating model'],
+    termsToSteal: ['value leakage', 'decision throughput', 'operating model'],
     termsToAvoid: ['reference architecture first', 'capability map first', 'governance forum design'],
     drill:
-      'A CEO says: we need to go to market with velocity. Answer in strategy execution language, not architecture language.',
+      'A CEO says: we need to go to market with flow. Answer in strategy execution language, not architecture language.',
   },
   {
     id: '100.3',

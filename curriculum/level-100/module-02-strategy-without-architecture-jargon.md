@@ -47,7 +47,7 @@ Executives are judged by movement. A strategy that does not convert into executi
 - Strategy-to-execution gap.
 - Value leakage.
 - Operating model.
-- Decision velocity.
+- Decision throughput.
 - Accountable ownership.
 - Performance rhythm.
 
@@ -72,7 +72,7 @@ Explain strategy execution as if the CEO asked: "Why are we not moving faster?" 
 
 ## Optional Copilot drill
 
-Tell the Copilot: "A CEO says we need to go to market with velocity. Make me answer in strategy execution language, not architecture language."
+Tell the Copilot: "A CEO says we need to go to market with flow. Make me answer in strategy execution language, not architecture language."
 
 ## Scenario application
 

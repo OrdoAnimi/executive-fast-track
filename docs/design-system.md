@@ -2,7 +2,7 @@
 
 ## Source alignment
 
-Executive Fast Track should visually inherit from Velocity Academy. It is a separate product stream but should feel like it belongs inside the same learning ecosystem.
+Executive Fast Track should visually inherit from OrdoAnimi Academy. It is a separate product stream but should feel like it belongs inside the same learning ecosystem.
 
 ## Core tokens
 
@@ -16,7 +16,7 @@ Executive Fast Track should visually inherit from Velocity Academy. It is a sepa
 - Indigo: `#3730A3`.
 - Navy: `#0F172A`.
 - Body font: Inter-style system stack.
-- Heading token: Playfair Display / Georgia reserved for future editorial sections, but current site uses the Velocity Academy weight system.
+- Heading token: Playfair Display / Georgia reserved for future editorial sections, but current site uses the OrdoAnimi Academy weight system.
 
 ## Component language
 

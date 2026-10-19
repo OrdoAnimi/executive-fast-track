@@ -19,7 +19,7 @@ npm run preview
 
 ## Design direction
 
-The app inherits the Velocity Academy aesthetic:
+The app inherits the OrdoAnimi Academy aesthetic:
 
 - Inter-style body typography.
 - Navy/charcoal hero section.
@@ -29,7 +29,7 @@ The app inherits the Velocity Academy aesthetic:
 - Dashboard-style course cards.
 - Restrained executive spacing.
 
-Do not redesign this into a generic SaaS course platform. Keep it aligned to Velocity Academy.
+Do not redesign this into a generic SaaS course platform. Keep it aligned to OrdoAnimi Academy.
 
 ## Release 1 acceptance criteria
 

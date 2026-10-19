@@ -18,7 +18,7 @@ Deliverables:
 
 ## Phase 2 — Internal academy product
 
-Turn the private capability system into a structured Velocity Academy course. The goal is repeatability: modules, progress, resource library, cool notes, and exercises that another learner can follow without direct explanation.
+Turn the private capability system into a structured OrdoAnimi Academy course. The goal is repeatability: modules, progress, resource library, cool notes, and exercises that another learner can follow without direct explanation.
 
 Deliverables:
 

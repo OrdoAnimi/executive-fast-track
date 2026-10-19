@@ -2,7 +2,7 @@
 
 **Executive Fast Track** is a practical C-suite fluency and boardroom engagement course for senior technologists, consultants, architects, founders, and operators who need to translate complex work into business value.
 
-The course is product-agnostic. It may live inside the Velocity Academy ecosystem, but it does not teach a proprietary framework. Its purpose is to train executive engagement: how to read the room, understand each executive role, frame value, manage objections, and communicate decisions in the language of business, finance, risk, market, operations, and governance.
+The course is product-agnostic. It may live inside the OrdoAnimi Academy ecosystem, but it does not teach a proprietary framework. Its purpose is to train executive engagement: how to read the room, understand each executive role, frame value, manage objections, and communicate decisions in the language of business, finance, risk, market, operations, and governance.
 
 ## Core promise
 
